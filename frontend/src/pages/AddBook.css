@@ -1,0 +1,21 @@
+.ql-editor {
+  font-size: 2vw;
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.ql-container {
+  height: 30vh;
+}
+.ql-snow.ql-toolbar button {
+  margin-left: 3px;
+  border-radius: 5px;
+  background-color: white;
+}
+.ql-snow .ql-picker-label {
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  font-weight: 600;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.2vw;
+}

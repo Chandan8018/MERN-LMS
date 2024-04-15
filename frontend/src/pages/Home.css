@@ -1,0 +1,28 @@
+.heading {
+  animation: movingColor 5s linear infinite;
+  background: linear-gradient(
+    to right,
+    #1a5495 20%,
+    var(#043155) 40%,
+    var(#03233d) 60%,
+    #2667b3 80%
+  );
+  color: #555c5f;
+  -webkit-background-clip: text;
+  text-align: center;
+  font-size: 3.125rem;
+  font-weight: 900;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+@keyframes movingColor {
+  50% {
+    color: navy;
+    /* Midway color */
+  }
+
+  100% {
+    color: rgb(169, 18, 18);
+    /* Ending color */
+  }
+}
