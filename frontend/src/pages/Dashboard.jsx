@@ -5,6 +5,7 @@ import DashProfile from "../components/DashProfile";
 import DashAllBooks from "../components/DashAllBooks";
 import AddBook from "../pages/AddBook";
 import DashUsers from "../components/DashUsers";
+import BookBorrow from "./BookBorrow";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -15,8 +16,8 @@ export default function Dashboard() {
     setTab(tabFromUrl);
   }, [location.search]);
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      <div className="md:w-56">
+    <div className='min-h-screen flex flex-col md:flex-row'>
+      <div className='md:w-56'>
         {/* SideBar  */}
         <DashSideBar />
       </div>
@@ -30,6 +31,8 @@ export default function Dashboard() {
       {tab === "add-book" && <AddBook />}
       {/* users */}
       {tab === "users" && <DashUsers />}
+      {/* book-borrow */}
+      {tab === "book-borrow" && <BookBorrow />}
     </div>
   );
 }

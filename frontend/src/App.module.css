@@ -1,7 +1,6 @@
 .main {
   background-image: url("./assets/whitebook.jpg");
   background-size: cover;
-  overflow: hidden;
 }
 
 .dark {

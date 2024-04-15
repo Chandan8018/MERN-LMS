@@ -39,26 +39,26 @@ export default function DashSideBar() {
   };
 
   return (
-    <Sidebar className="w-full md:w-56" aria-label="Sidebar">
+    <Sidebar className='w-full md:w-56' aria-label='Sidebar'>
       <Sidebar.Items>
-        <Sidebar.ItemGroup className="flex flex-col gap-1">
-          <Link to="/dashboard?tab=profile">
+        <Sidebar.ItemGroup className='flex flex-col gap-1'>
+          <Link to='/dashboard?tab=profile'>
             <Sidebar.Item
               active={tab === "profile"}
               icon={HiUser}
               label={currentUser.isAdmin ? "Admin" : "Student"}
-              className="cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg"
-              as="div"
+              className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+              as='div'
             >
               Profile
             </Sidebar.Item>
           </Link>
-          <Link to="/dashboard?tab=books">
+          <Link to='/dashboard?tab=books'>
             <Sidebar.Item
               active={tab === "books"}
               icon={GiBookmarklet}
-              className="cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg"
-              as="div"
+              className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+              as='div'
             >
               Books' Collection
             </Sidebar.Item>
@@ -66,32 +66,43 @@ export default function DashSideBar() {
 
           {currentUser.isAdmin && (
             <>
-              <Link to="/dashboard?tab=add-book">
+              <Link to='/dashboard?tab=add-book'>
                 <Sidebar.Item
                   active={tab === "add-book"}
                   icon={BiSolidBookAdd}
-                  className="cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg"
-                  as="div"
+                  className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                  as='div'
                 >
                   Add Book
                 </Sidebar.Item>
               </Link>
-              <Link to="/dashboard?tab=users">
+              <Link to='/dashboard?tab=users'>
                 <Sidebar.Item
                   active={tab === "users"}
                   icon={FaUsers}
-                  className="cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg"
-                  as="div"
+                  className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                  as='div'
                 >
                   Users
                 </Sidebar.Item>
               </Link>
             </>
           )}
-
+          {!currentUser.isAdmin && (
+            <Link to='/dashboard?tab=book-borrow'>
+              <Sidebar.Item
+                active={tab === "book-borrow"}
+                icon={FaUsers}
+                className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                as='div'
+              >
+                Book Borrow
+              </Sidebar.Item>
+            </Link>
+          )}
           <Sidebar.Item
             icon={FaSignOutAlt}
-            className="cursor-pointer hover:bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 rounded-lg"
+            className='cursor-pointer hover:bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 rounded-lg'
             onClick={handleSignout}
           >
             Sign Out
