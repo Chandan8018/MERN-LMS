@@ -13,6 +13,7 @@ import css from "./App.module.css";
 import { useSelector } from "react-redux";
 import AddBook from "./pages/AddBook";
 import JoinGuidelines from "./pages/JoinGuidelines";
+import BookView from "./pages/BookView";
 
 export default function App() {
   const themeState = useSelector((state) => state.theme);
@@ -34,6 +35,7 @@ export default function App() {
             <Route path='/update-post/:postId' element={<UpdateBook />} />
           </Route>
           <Route path='/projects' element={<Projects />} />
+          <Route path='/book-post/:postSlug' element={<BookView />} />
         </Routes>
         <FooterComp />
       </BrowserRouter>

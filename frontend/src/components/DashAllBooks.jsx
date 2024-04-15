@@ -96,7 +96,7 @@ export default function DashAllBooks() {
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
                   <Table.Cell>
-                    <Link to={`/post/${post.slug}`}>
+                    <Link to={`/book-post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
@@ -107,7 +107,7 @@ export default function DashAllBooks() {
                   <Table.Cell>
                     <Link
                       className='font-medium text-gray-900 dark:text-white'
-                      to={`/post/${post.slug}`}
+                      to={`/book-post/${post.slug}`}
                     >
                       {post.title}
                     </Link>
@@ -164,7 +164,7 @@ export default function DashAllBooks() {
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
                   <Table.Cell>
-                    <Link to={`/post/${post.slug}`}>
+                    <Link to={`/book-post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
@@ -175,7 +175,7 @@ export default function DashAllBooks() {
                   <Table.Cell>
                     <Link
                       className='font-medium text-gray-900 dark:text-white'
-                      to={`/post/${post.slug}`}
+                      to={`/book-post/${post.slug}`}
                     >
                       {post.title}
                     </Link>

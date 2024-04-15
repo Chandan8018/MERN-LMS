@@ -58,7 +58,7 @@ export default function SwiperComp() {
                 />
               )}
             >
-              <Link to={`/post/${post._id}`}>
+              <Link to={`/book-post/${post.slug}`}>
                 <h5 className='hidden md:block md:text-sm font-bold text-gray-900 dark:text-white hover:text-blue-600 hover:underline'>
                   {post.title}
                 </h5>

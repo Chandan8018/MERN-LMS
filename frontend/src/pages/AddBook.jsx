@@ -75,7 +75,7 @@ export default function AddBook() {
 
       if (res.ok) {
         setPublishError(null);
-        navigate(`/post/${data.slug}`);
+        navigate(`/book-post/${data.slug}`);
       }
     } catch (error) {
       setPublishError("Something went wrong last", error);
