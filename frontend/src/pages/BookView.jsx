@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Spinner } from "flowbite-react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import CallToAction from "../components/CallToAction";
 
 export default function BookView() {
   const { postSlug } = useParams();
@@ -55,18 +56,21 @@ export default function BookView() {
       <img
         src={post && post.image}
         alt={post && post.title}
-        className='mt-10 p-3 max-h-[600px] w-full object-cover'
+        className='mt-10 p-3 max-h-[400px] max-w-2xl  mx-auto object-cover'
       />
-      <div className='flex justify-between p-3 border-b border-slate-500 mx-auto w-full max-w-2xl text-xs'>
+      <div className='flex justify-between p-3 border-b border-slate-500 mx-auto max-w-2xl w-80 font-bold text-xs'>
         <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
         <span className='italic'>
-          {post && (post.content.length / 1000).toFixed(0)} mins read
+          {post && (post.content.length / 500).toFixed(0)} mins read
         </span>
       </div>
       <div
-        className='p-3 max-w-2xl mx-auto w-full post-content'
+        className='p-3 max-w-2xl mx-auto w-full post-content bg-slate-300 dark:bg-slate-800 dark:text-white border-solid border-2 border-slate-500 rounded-lg '
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
+      <div className='max-w-4xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
+        <CallToAction />
+      </div>
     </main>
   );
 }

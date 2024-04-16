@@ -5,6 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import EmployeeSlider from "../components/HomeComponents/EmployeeSlider";
 import SwiperComp from "../components/HomeComponents/SwiperComp";
+import CallToAction from "../components/CallToAction";
 
 export default function Home() {
   return (
@@ -107,6 +108,10 @@ export default function Home() {
       <hr />
       <hr />
       <SwiperComp />
+      <br />
+      <div className='max-w-4xl mx-auto w-full mt-5  rounded-tl-3xl rounded-br-3xl '>
+        <CallToAction />
+      </div>
       <br />
       {/* Employee Slider */}
       <EmployeeSlider />
