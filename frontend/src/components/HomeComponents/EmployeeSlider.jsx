@@ -6,30 +6,14 @@ export default function EmployeeSlider() {
   const employees = [
     {
       id: 1,
-      name: "Manpreet Singh",
-      photo:
-        "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
-      position: "Owner",
-      description: "Manpreet is the Product Owner of the project.",
-    },
-    {
-      id: 2,
-      name: "Anirudh Phadke",
-      photo:
-        "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
-      position: "Owner",
-      description: "Anirudh is the Product Owner of the project.",
-    },
-    {
-      id: 3,
       name: "Angadi dileep kumar",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
       position: "Project Manager",
-      description: "Angadi dileep is the Project Manage of the project.",
+      description: "Angadi dileep is the Project Manager.",
     },
     {
-      id: 4,
+      id: 2,
       name: "Chandan Kumar Sahoo",
       photo:
         "https://firebasestorage.googleapis.com/v0/b/mern-lms-5f11d.appspot.com/o/17131099915741711087824576.jpg?alt=media&token=15c1f56c-d037-45c2-831a-4b55a4b48252",
@@ -37,24 +21,24 @@ export default function EmployeeSlider() {
       description: "Chandan is the UX Designer of the project.",
     },
     {
-      id: 5,
+      id: 3,
       name: "Bhupinder Singh",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
-      position: "Design",
-      description: "Bhupinder is the Design of the project.",
+      position: "Designer",
+      description: "Bhupinder is the Designer of the project.",
     },
 
     {
-      id: 6,
+      id: 4,
       name: "Pawanjeet Singh",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
-      position: "Design",
-      description: "Pawanjeet is the Design of the project.",
+      position: "Designer",
+      description: "Pawanjeet is the Designer of the project.",
     },
     {
-      id: 7,
+      id: 5,
       name: "Obair nisar najar",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
@@ -62,7 +46,7 @@ export default function EmployeeSlider() {
       description: "Obair is the Frontend Designer of the project.",
     },
     {
-      id: 8,
+      id: 6,
       name: "Anwar khan",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",

@@ -3,6 +3,7 @@ import { Button, Spinner } from "flowbite-react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CallToAction from "../components/CallToAction";
+import CommentSection from "../components/CommentSection";
 
 export default function BookView() {
   const { postSlug } = useParams();
@@ -10,7 +11,7 @@ export default function BookView() {
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
   const [recentPosts, setRecentPosts] = useState(null);
-  console.log(post);
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -71,6 +72,7 @@ export default function BookView() {
       <div className='max-w-4xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
         <CallToAction />
       </div>
+      <CommentSection postId={post._id} />
     </main>
   );
 }

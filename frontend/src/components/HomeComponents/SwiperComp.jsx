@@ -31,10 +31,8 @@ export default function SwiperComp() {
 
   return (
     <>
-      <h1 className='heading underline hidden md:block'>Books' lobby</h1>
-      <h1 className='text-center text-2xl font-bold underline md:hidden'>
-        Books' lobby
-      </h1>
+      <h1 className='heading hidden md:block'>Books' lobby</h1>
+      <h1 className='text-center text-2xl font-bold md:hidden'>Books' lobby</h1>
       <br />
       <Swiper
         // install Swiper modules
