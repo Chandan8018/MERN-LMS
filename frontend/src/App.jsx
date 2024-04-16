@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import AddBook from "./pages/AddBook";
 import JoinGuidelines from "./pages/JoinGuidelines";
 import BookView from "./pages/BookView";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   const themeState = useSelector((state) => state.theme);
@@ -22,6 +23,7 @@ export default function App() {
   return (
     <div className={theme === "light" ? css.main : css.dark}>
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
