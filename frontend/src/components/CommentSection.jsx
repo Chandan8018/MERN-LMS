@@ -1,4 +1,4 @@
-import { Button, Textarea } from "flowbite-react";
+import { Alert, Button, Textarea } from "flowbite-react";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +6,36 @@ import { Link, useNavigate } from "react-router-dom";
 export default function CommentSection({ postId }) {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [comment, setComment] = useState("");
+  const [commentError, setCommentError] = useState(null);
+  const [comments, setComments] = useState([]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (comment.length > 200) {
+      return;
+    }
+    try {
+      const res = await fetch("/api/comment/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: comment,
+          postId,
+          userId: currentUser._id,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setComment("");
+        setCommentError(null);
+        setComments([data, ...comments]);
+      }
+    } catch (error) {
+      setCommentError(error.message);
+    }
+  };
   return (
     <div className='max-w-2xl mx-auto w-full p-3 mt-5 rounded-xl bg-slate-300 dark:bg-slate-800 dark:text-white'>
       {/* sign in section */}
@@ -36,7 +65,10 @@ export default function CommentSection({ postId }) {
 
       {/* comment form */}
       {currentUser && (
-        <form className='border border-teal-500 rounded-md p-3'>
+        <form
+          onSubmit={handleSubmit}
+          className='border border-teal-500 rounded-md p-3'
+        >
           <Textarea
             placeholder='Add a comment...'
             rows='3'
@@ -52,6 +84,12 @@ export default function CommentSection({ postId }) {
               Submit
             </Button>
           </div>
+          {/* error */}
+          {commentError && (
+            <Alert color='failure' className='mt-5'>
+              {commentError}
+            </Alert>
+          )}
         </form>
       )}
     </div>
