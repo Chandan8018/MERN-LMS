@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 import userRouters from "./routes/user.route.js";
 import authRouters from "./routes/auth.route.js";
 import postRouters from "./routes/post.route.js";
+import commentRoutes from "./routes/comment.route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRouters);
 app.use("/api/auth", authRouters);
 app.use("/api/post", postRouters);
+app.use("/api/comment", commentRoutes);
 
 //Error-Handling Middleware
 app.use((err, req, res, next) => {
