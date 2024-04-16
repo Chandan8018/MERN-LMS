@@ -170,7 +170,7 @@ export default function AddBook() {
 
         <ReactQuill
           theme='snow'
-          placeholder='Empty space is so boring... go on and write something...'
+          placeholder='Empty content is so boring... Go on, and write book content here...'
           className=' dark:bg-[#1F2937] dark:text-white'
           required
           onChange={(e) => setFormData({ ...formData, content: e })}

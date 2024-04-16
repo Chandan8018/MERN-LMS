@@ -69,7 +69,7 @@ export default function BookView() {
         className='p-3 max-w-2xl mx-auto w-full post-content bg-slate-300 dark:bg-slate-800 dark:text-white border-solid border-2 border-slate-500 rounded-lg '
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
-      <div className='max-w-4xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
+      <div className='max-w-2xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
         <CallToAction />
       </div>
       <CommentSection postId={post._id} />
