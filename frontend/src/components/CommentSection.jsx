@@ -82,6 +82,19 @@ export default function CommentSection({ postId }) {
     }
   };
 
+  const handelEdit = async (comment, editedContent) => {
+    setComments(
+      comments.map((c) =>
+        c._id === comment._id
+          ? {
+              ...c,
+              content: editedContent,
+            }
+          : c
+      )
+    );
+  };
+
   return (
     <div className='max-w-2xl mx-auto w-full p-3 mt-5 rounded-xl bg-slate-300 dark:bg-slate-800 dark:text-white'>
       {/* sign in section */}
@@ -151,7 +164,12 @@ export default function CommentSection({ postId }) {
             </div>
           </div>
           {comments.map((comment) => (
-            <Comment key={comment._id} comment={comment} onLike={handleLike} />
+            <Comment
+              key={comment._id}
+              comment={comment}
+              onLike={handleLike}
+              onEdit={handelEdit}
+            />
           ))}
         </>
       )}
