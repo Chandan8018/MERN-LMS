@@ -46,9 +46,10 @@ export default function BookView() {
       <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
         {post && post.title}
       </h1>
+
       <Link
         to={`/search?category=${post && post.category}`}
-        className='self-center mt-5'
+        className='self-center'
       >
         <Button color='gray' pill size='xs'>
           {post && post.category}
@@ -57,16 +58,17 @@ export default function BookView() {
       <img
         src={post && post.image}
         alt={post && post.title}
-        className='mt-10 p-3 max-h-[400px] max-w-2xl  mx-auto object-cover'
+        className=' p-3 max-h-[400px] max-w-2xl  mx-auto object-cover'
       />
-      <div className='flex justify-between p-3 border-b border-slate-500 mx-auto max-w-2xl w-80 font-bold text-xs'>
+      <div className='flex justify-between p-3 border-b border-slate-500 mx-auto max-w-2xl w-80 text-xs'>
         <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
-        <span className='italic'>
+        <span className='italic text-blue-500'>
           {post && (post.content.length / 500).toFixed(0)} mins read
         </span>
       </div>
+
       <div
-        className='p-3 max-w-2xl mx-auto w-full post-content bg-slate-300 dark:bg-slate-800 dark:text-white border-solid border-2 border-slate-500 rounded-lg '
+        className=' p-3 max-w-2xl mx-auto w-full post-content bg-slate-300 dark:bg-slate-800 dark:text-white border-solid border-2 border-slate-500 rounded-lg '
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
       <div className='max-w-2xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
