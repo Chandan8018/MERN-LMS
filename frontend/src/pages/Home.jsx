@@ -4,10 +4,28 @@ import "./Home.css";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import EmployeeSlider from "../components/HomeComponents/EmployeeSlider";
-import SwiperComp from "../components/HomeComponents/SwiperComp";
 import CallToAction from "../components/CallToAction";
+import { useEffect, useState } from "react";
+import BookCard from "../components/BookCard";
 
 export default function Home() {
+  const [recentPosts, setRecentPosts] = useState(null);
+
+  useEffect(() => {
+    try {
+      const fetchRecentPosts = async () => {
+        const res = await fetch(`/api/post/getposts?limit=4`);
+        const data = await res.json();
+        if (res.ok) {
+          setRecentPosts(data.posts);
+        }
+      };
+      fetchRecentPosts();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+
   return (
     <div className='main min-h-screen bg-[#BEBFC3] dark:bg-gray-900'>
       <div className='h-64 sm:h-80 xl:h-96 bg-[#FDFBFC]'>
@@ -105,11 +123,16 @@ export default function Home() {
         </div>
       </div>
       <hr />
-      <hr />
-      <hr />
-      <SwiperComp />
+
+      <div className='flex flex-col justify-center  items-center pl-5 mb-5 overflow-x-auto'>
+        <h1 className='text-2xl md:text-3xl font-bold mt-5'>Recent Books</h1>
+        <div className='flex flex-wrap justify-center gap-5 md:gap-16 my-5 '>
+          {recentPosts &&
+            recentPosts.map((post) => <BookCard key={post._id} post={post} />)}
+        </div>
+      </div>
       <br />
-      <div className='max-w-4xl mx-auto w-full mt-5  rounded-tl-3xl rounded-br-3xl '>
+      <div className='max-w-4xl mx-auto w-full mt-5 rounded-tl-3xl rounded-br-3xl '>
         <CallToAction />
       </div>
       <br />
