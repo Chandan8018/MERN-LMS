@@ -7,6 +7,7 @@ import AddBook from "../pages/AddBook";
 import DashUsers from "../components/DashUsers";
 import BookBorrow from "./BookBorrow";
 import DashComments from "../components/DashComments";
+import DashboardComp from "../components/DashboardComp";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -28,15 +29,21 @@ export default function Dashboard() {
 
       {/* posts */}
       {tab === "books" && <DashAllBooks />}
+
       {/* add books */}
       {tab === "add-book" && <AddBook />}
+
       {/* users */}
       {tab === "users" && <DashUsers />}
+
       {/* book-borrow */}
       {tab === "book-borrow" && <BookBorrow />}
 
       {/* All Comments */}
       {tab === "comments" && <DashComments />}
+
+      {/* Dashboard Component */}
+      {tab === "dash" && <DashboardComp />}
     </div>
   );
 }

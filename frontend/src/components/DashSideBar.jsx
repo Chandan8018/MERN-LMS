@@ -4,6 +4,7 @@ import { FaSignOutAlt, FaUsers } from "react-icons/fa";
 import { HiUser } from "react-icons/hi";
 import { BiSolidBookAdd } from "react-icons/bi";
 import { GiBookmarklet } from "react-icons/gi";
+import { MdDashboard } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
@@ -55,19 +56,18 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
 
-          <Link to='/dashboard?tab=books'>
-            <Sidebar.Item
-              active={tab === "books"}
-              icon={GiBookmarklet}
-              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
-              as='div'
-            >
-              Books' Collection
-            </Sidebar.Item>
-          </Link>
-
           {currentUser.isAdmin && (
             <>
+              <Link to='/dashboard?tab=dash'>
+                <Sidebar.Item
+                  active={tab === "dash"}
+                  icon={MdDashboard}
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+                  as='div'
+                >
+                  Dashboard
+                </Sidebar.Item>
+              </Link>
               <Link to='/dashboard?tab=add-book'>
                 <Sidebar.Item
                   active={tab === "add-book"}
@@ -102,6 +102,18 @@ export default function DashSideBar() {
               </Link>
             </>
           )}
+
+          <Link to='/dashboard?tab=books'>
+            <Sidebar.Item
+              active={tab === "books"}
+              icon={GiBookmarklet}
+              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+              as='div'
+            >
+              Books' Collection
+            </Sidebar.Item>
+          </Link>
+
           {!currentUser.isAdmin && (
             <Link to='/dashboard?tab=book-borrow'>
               <Sidebar.Item
