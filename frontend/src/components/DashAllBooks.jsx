@@ -86,7 +86,7 @@ export default function DashAllBooks() {
               <Table.HeadCell>Available Copies</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>
-                <span>Edit</span>
+                <span> Edit </span>
               </Table.HeadCell>
             </Table.Head>
             {userPosts.map((post) => (
@@ -100,7 +100,7 @@ export default function DashAllBooks() {
                       <img
                         src={post.image}
                         alt={post.title}
-                        className='w-20 h-20 object-cover bg-gray-500 rounded-xl shadow-xl shadow-slate-700'
+                        className='w-10 h-10 md:h-20 md:w-20 object-cover bg-gray-500 rounded-xl shadow-xl shadow-slate-700'
                       />
                     </Link>
                   </Table.Cell>
@@ -120,9 +120,9 @@ export default function DashAllBooks() {
                         setShowModal(true);
                         setPostIdToDelete(post._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
+                      className='font-medium text-pink-500 hover:underline cursor-pointer'
                     >
-                      <MdDelete className='text-3xl shadow-xl shadow-slate-700' />
+                      <MdDelete className='text-3xl hover:text-4xl hover:text-red-500' />
                     </span>
                   </Table.Cell>
                   <Table.Cell>
@@ -130,7 +130,7 @@ export default function DashAllBooks() {
                       className='text-teal-500 hover:underline'
                       to={`/update-post/${post._id}`}
                     >
-                      <FaEdit className='text-3xl shadow-xl shadow-slate-700' />
+                      <FaEdit className='text-3xl hover:text-4xl hover:text-blue-500' />
                     </Link>
                   </Table.Cell>
                 </Table.Row>
