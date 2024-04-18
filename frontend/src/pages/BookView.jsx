@@ -59,7 +59,7 @@ export default function BookView() {
       </div>
     );
   return (
-    <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+    <main className='p-3 flex flex-col max-w-full mx-auto min-h-screen bg-slate-300 dark:bg-slate-800 dark:text-white'>
       <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
         {post && post.title}
       </h1>
@@ -85,15 +85,16 @@ export default function BookView() {
       </div>
 
       <div
-        className=' p-3 max-w-2xl mx-auto w-full post-content bg-slate-300 dark:bg-slate-800 dark:text-white border-solid border-2 border-slate-500 rounded-lg '
+        className=' p-3 max-w-2xl mx-auto w-full post-content '
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
-      <div className='max-w-2xl mx-auto w-full mt-5 bg-slate-300 dark:bg-slate-800 dark:text-white rounded-tl-3xl rounded-br-3xl '>
+
+      <CommentSection postId={post._id} />
+      <div className='max-w-2xl mx-auto w-full mt-5  rounded-tl-3xl rounded-br-3xl '>
         <CallToAction />
       </div>
-      <CommentSection postId={post._id} />
       <div className='flex flex-col justify-center items-center mb-5'>
-        <h1 className='text-xl mt-5'>Recent articles</h1>
+        <h1 className='text-xl mt-5'>Recent Books</h1>
         <div className='flex flex-wrap gap-5 mt-5 justify-center'>
           {recentPosts &&
             recentPosts.map((post) => <BookCard key={post._id} post={post} />)}

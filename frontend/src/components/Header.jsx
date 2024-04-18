@@ -8,6 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutSuccess } from "../redux/user/userSlice";
+import icon from "../assets/logo-no-background.png";
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -40,14 +41,11 @@ export default function Header() {
         to='/'
         className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white flex items-center'
       >
-        <Avatar
-          img='https://i.pinimg.com/originals/4b/83/b8/4b83b890a44d679f7e510396e09b49c5.gif'
-          alt='LMS'
-        />
-        <span className='px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-white'>
-          Books'
+        <Avatar img={icon} alt='LMS' />
+        <span className='ml-2 px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-white'>
+          Make Life
         </span>
-        Club
+        Easy
       </Link>
 
       <TextInput
@@ -109,8 +107,13 @@ export default function Header() {
           </>
         ) : (
           <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue' color='gray' pill outline>
-              Sign In
+            <Button
+              className='hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945]'
+              color='gray'
+              pill
+              outline
+            >
+              <span className='hover:text-black'>Sign In</span>
             </Button>
           </Link>
         )}

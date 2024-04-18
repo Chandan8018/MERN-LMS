@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram, BsGithub } from "react-icons/bs";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
+import icon from "../assets/logo-no-background.png";
 export default function FooterCom() {
   return (
     <Footer
@@ -16,14 +17,11 @@ export default function FooterCom() {
               to='/'
               className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white flex items-center'
             >
-              <Avatar
-                img='https://i.pinimg.com/originals/4b/83/b8/4b83b890a44d679f7e510396e09b49c5.gif'
-                alt='LMS'
-              />
-              <span className='px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-black'>
-                Book's
+              <Avatar img={icon} alt='LMS' />
+              <span className='ml-2 px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-black'>
+                Make Life
               </span>
-              Club
+              Easy
             </Link>
           </div>
           <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6'>

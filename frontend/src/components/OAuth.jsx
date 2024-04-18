@@ -38,13 +38,14 @@ export default function OAuth() {
   };
   return (
     <Button
-      type="button"
-      gradientDuoTone="pinkToOrange"
+      type='button'
+      color='purple'
+      className='text-purple hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945]'
       outline
       onClick={handleGoogleClick}
     >
-      <AiFillGoogleCircle className="h-5 w-5 mr-4" />
-      <span className=" font-weight-900 ">Continue with Google</span>
+      <AiFillGoogleCircle className='h-5 w-5 mr-4' />
+      <span className=' font-weight-900  '>Continue with Google</span>
     </Button>
   );
 }

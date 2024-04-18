@@ -17,6 +17,7 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import icon from "../assets/logo-no-background.png";
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
@@ -73,15 +74,11 @@ export default function Signin() {
             to='/'
             className=' font-bold dark:text-white text-4xl flex items-center'
           >
-            <Avatar
-              img='https://i.pinimg.com/originals/4b/83/b8/4b83b890a44d679f7e510396e09b49c5.gif'
-              alt='LMS'
-              size='lg'
-            />
-            <span className='px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-white'>
-              Books'
+            <Avatar img={icon} alt='LMS' size='lg' />
+            <span className='ml-2 px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-white'>
+              Make Life
             </span>
-            Club
+            Easy
           </Link>
 
           <p className='text-sm mt-5 dark:text-white text-black'>

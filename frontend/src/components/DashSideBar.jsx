@@ -47,7 +47,7 @@ export default function DashSideBar() {
               active={tab === "profile"}
               icon={HiUser}
               label={currentUser.isAdmin ? "Admin" : "Student"}
-              className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
               as='div'
             >
               Profile
@@ -57,7 +57,7 @@ export default function DashSideBar() {
             <Sidebar.Item
               active={tab === "books"}
               icon={GiBookmarklet}
-              className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
               as='div'
             >
               Books' Collection
@@ -70,7 +70,7 @@ export default function DashSideBar() {
                 <Sidebar.Item
                   active={tab === "add-book"}
                   icon={BiSolidBookAdd}
-                  className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
                   as='div'
                 >
                   Add Book
@@ -80,7 +80,7 @@ export default function DashSideBar() {
                 <Sidebar.Item
                   active={tab === "users"}
                   icon={FaUsers}
-                  className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
                   as='div'
                 >
                   Users
@@ -93,7 +93,7 @@ export default function DashSideBar() {
               <Sidebar.Item
                 active={tab === "book-borrow"}
                 icon={FaUsers}
-                className='cursor-pointer hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg'
+                className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
                 as='div'
               >
                 Book Borrow
