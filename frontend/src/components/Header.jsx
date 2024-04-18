@@ -8,7 +8,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signoutSuccess } from "../redux/user/userSlice";
-import icon from "../assets/logo-no-background.png";
+import icon from "../assets/logo2.png";
 
 export default function Header() {
   const path = useLocation().pathname;
@@ -41,11 +41,7 @@ export default function Header() {
         to='/'
         className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white flex items-center'
       >
-        <Avatar img={icon} alt='LMS' />
-        <span className='ml-2 px-2 py-1 bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 rounded-lg text-white'>
-          Make Life
-        </span>
-        Easy
+        <img src={icon} alt='logo' className='h-12 w-36' />
       </Link>
 
       <TextInput
