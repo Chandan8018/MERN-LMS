@@ -50,7 +50,7 @@ export default function Home() {
           <Link to='/guidelines'>
             <Button
               color='blue'
-              className='bg-[#FF9F41] flex justify-center items-center'
+              className='text-black font-bold bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] flex justify-center items-center'
             >
               How To Join <FaArrowRightLong className='ml-5 mt-1' />
             </Button>

@@ -117,7 +117,7 @@ export default function Signin() {
 
             <Button
               type='submit'
-              className='bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600'
+              className='bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600 '
               disabled={loading}
             >
               {loading ? (

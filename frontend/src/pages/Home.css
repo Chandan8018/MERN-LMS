@@ -2,10 +2,10 @@
   animation: movingColor 5s linear infinite;
   background: linear-gradient(
     to right,
-    #1a5495 20%,
+    #a68750 20%,
     var(#043155) 40%,
     var(#03233d) 60%,
-    #2667b3 80%
+    #a68750 80%
   );
   color: #555c5f;
   -webkit-background-clip: text;
@@ -17,7 +17,7 @@
 
 @keyframes movingColor {
   50% {
-    color: navy;
+    color: #a68750;
     /* Midway color */
   }
 
