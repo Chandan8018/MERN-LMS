@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function BookCard({ post }) {
   return (
-    <div className='bg-slate-300 dark:bg-slate-800 dark:text-white group relative w-56 border border-teal-500 hover:border-2 h-[350px] overflow-hidden rounded-lg sm:w-56 transition-all hover:opacity-60'>
+    <div className='bg-slate-300 dark:bg-slate-800 dark:text-white group relative w-56 border border-[#9C7945] hover:border-2 h-[350px] overflow-hidden rounded-lg sm:w-56 transition-all hover:opacity-60'>
       <Link to={`/book-post/${post.slug}`}>
         <img
           src={post.image}
@@ -15,7 +15,7 @@ export default function BookCard({ post }) {
         <span className='italic text-sm'>{post.category}</span>
         <Link
           to={`/book-post/${post.slug}`}
-          className='z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
+          className='z-10 group-hover:bottom-0 absolute bottom-[-200px] left-0 right-0 border border-[#9C7945] text-teal-500 hover:bg-teal-500 hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
         >
           Read Book
         </Link>

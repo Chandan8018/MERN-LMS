@@ -4,7 +4,7 @@ import About from "./pages/About";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import Projects from "./pages/Projects";
+import Books from "./pages/Books";
 import Header from "./components/Header";
 import FooterComp from "./components/FooterComp";
 import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute ";
@@ -36,7 +36,7 @@ export default function App() {
             <Route path='/create-post' element={<AddBook />} />
             <Route path='/update-post/:postId' element={<UpdateBook />} />
           </Route>
-          <Route path='/projects' element={<Projects />} />
+          <Route path='/Books' element={<Books />} />
           <Route path='/book-post/:postSlug' element={<BookView />} />
         </Routes>
         <FooterComp />
