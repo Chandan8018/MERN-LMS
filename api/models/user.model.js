@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    regdNumber: {
+      type: String,
+      unique: true,
+      default: null,
+    },
   },
   { timestamps: true }
 );
