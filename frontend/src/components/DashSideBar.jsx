@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { AiOutlineComment } from "react-icons/ai";
+import { PiStudentFill } from "react-icons/pi";
 
 export default function DashSideBar() {
   const location = useLocation();
@@ -66,6 +67,16 @@ export default function DashSideBar() {
                   as='div'
                 >
                   Dashboard
+                </Sidebar.Item>
+              </Link>
+              <Link to='/dashboard?tab=students'>
+                <Sidebar.Item
+                  active={tab === "students"}
+                  icon={PiStudentFill}
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+                  as='div'
+                >
+                  Students Dash
                 </Sidebar.Item>
               </Link>
               <Link to='/dashboard?tab=add-book'>

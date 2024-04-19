@@ -83,11 +83,11 @@ export default function AddBook() {
   };
 
   return (
-    <div className=' p-3 pr-40 max-w-4xl mx-auto md:flex-row md:items-center gap-5'>
-      <h1 className='text-3xl font-bold text-center my-7 dark:text-white'>
-        Add a new book
-      </h1>
+    <div className=' flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
       <form className='flex flex-col gap-4' onSubmit={handleUploadSubmit}>
+        <h1 className='text-3xl font-bold text-center my-7 dark:text-white'>
+          Add a new book
+        </h1>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             id='title'
