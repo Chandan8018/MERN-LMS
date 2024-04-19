@@ -23,9 +23,8 @@ import { useDispatch } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { MdEmail } from "react-icons/md";
-import { RxUpdate } from "react-icons/rx";
-import { Link, useNavigate } from "react-router-dom";
+import { MdEmail, MdNumbers } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function DashProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);
@@ -173,20 +172,20 @@ export default function DashProfile() {
     }
   };
   return (
-    <div className="max-w-lg mx-auto p-3 w-full">
-      <h1 className="my-7 text-center font-semibold text-3xl dark:text-white">
+    <div className='max-w-lg mx-auto p-3 w-full'>
+      <h1 className='my-7 text-center font-semibold text-3xl dark:text-white'>
         Profile
       </h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           onChange={handleImageChange}
           ref={filePickerRef}
           hidden
         />
         <div
-          className="relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full"
+          className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
           onClick={() => filePickerRef.current.click()}
         >
           {imageFileUploadProgress && (
@@ -212,7 +211,7 @@ export default function DashProfile() {
           )}
           <img
             src={imageFileUrl || currentUser.profilePicture}
-            alt="user"
+            alt='user'
             className={`rounded-full w-full h-full object-cover border-8 border-[lightgray] ${
               imageFileUploadProgress &&
               imageFileUploadProgress < 100 &&
@@ -221,64 +220,74 @@ export default function DashProfile() {
           />
         </div>
         {imageFileUploadError && (
-          <Alert color="failure">{imageFileUploadError}</Alert>
+          <Alert color='failure'>{imageFileUploadError}</Alert>
         )}
         <TextInput
-          type="text"
-          id="username"
-          placeholder="username"
-          rightIcon={FaUser}
+          type='text'
+          id='username'
+          placeholder='username'
+          addon=<FaUser size='20' />
           defaultValue={currentUser.username}
           onChange={handleChange}
         />
         <TextInput
-          type="email"
-          id="email"
-          placeholder="email"
-          rightIcon={MdEmail}
+          type='email'
+          id='email'
+          placeholder='email'
+          addon=<MdEmail size='20' />
           defaultValue={currentUser.email}
           onChange={handleChange}
         />
+        {!currentUser.isAdmin && (
+          <TextInput
+            type='text'
+            id='regdNumber'
+            placeholder='Registration Number'
+            addon=<MdNumbers size='20' />
+            defaultValue={currentUser.regdNumber}
+            onChange={handleChange}
+          />
+        )}
         <TextInput
-          type="password"
-          id="password"
-          placeholder="password"
-          rightIcon={RiLockPasswordFill}
+          type='password'
+          id='password'
+          placeholder='password'
+          addon=<RiLockPasswordFill size='20' />
           onChange={handleChange}
         />
         <Button
-          type="submit"
-          gradientDuoTone="purpleToBlue"
-          className="hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600"
+          type='submit'
+          gradientDuoTone='purpleToBlue'
+          className='hover:bg-gradient-to-r from-purple-900 via-slate-400 to-blue-600'
           disabled={loading || imageFileUploading}
         >
           {loading ? "Loading..." : "Update"}
         </Button>
       </form>
-      <div className="flex justify-between mt-5">
-        <Button onClick={() => setShowModal(true)} color="failure">
+      <div className='flex justify-between mt-5'>
+        <Button onClick={() => setShowModal(true)} color='failure'>
           Delete Account
         </Button>
         <Button
           onClick={handleSignout}
-          color="failure"
-          className="cursor-pointer"
+          color='failure'
+          className='cursor-pointer'
         >
           Sign Out
         </Button>
       </div>
       {updateUserSuccess && (
-        <Alert color="success" className="mt-5">
+        <Alert color='success' className='mt-5'>
           {updateUserSuccess}
         </Alert>
       )}
       {updateUserError && (
-        <Alert color="failure" className="mt-5">
+        <Alert color='failure' className='mt-5'>
           {updateUserError}
         </Alert>
       )}
       {error && (
-        <Alert color="failure" className="mt-5">
+        <Alert color='failure' className='mt-5'>
           {error}
         </Alert>
       )}
@@ -286,20 +295,20 @@ export default function DashProfile() {
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
-        size="md"
+        size='md'
       >
         <Modal.Header />
         <Modal.Body>
-          <div className="text-center">
-            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+          <div className='text-center'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
               Are you sure you want to delete your account?
             </h3>
-            <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={handleDeleteUser}>
+            <div className='flex justify-center gap-4'>
+              <Button color='failure' onClick={handleDeleteUser}>
                 Yes, I'm sure
               </Button>
-              <Button color="gray" onClick={() => setShowModal(false)}>
+              <Button color='gray' onClick={() => setShowModal(false)}>
                 No, cancel
               </Button>
             </div>

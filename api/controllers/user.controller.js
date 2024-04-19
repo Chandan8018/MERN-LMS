@@ -34,14 +34,17 @@ export const updateUser = async (req, res, next) => {
       );
     }
   }
-  if (req.body.regdNumber.includes(" ")) {
-    return next(errorHandler(400, "Regd. Number cannot contain spaces"));
+  if (req.body.regdNumber) {
+    if (req.body.regdNumber.includes(" ")) {
+      return next(errorHandler(400, "Regd. Number cannot contain spaces"));
+    }
+    if (!req.body.regdNumber.match(/^[a-zA-Z0-9]+$/)) {
+      return next(
+        errorHandler(400, "Reg. Number can only contain letters and numbers")
+      );
+    }
   }
-  if (!req.body.regdNumber.match(/^[a-zA-Z0-9]+$/)) {
-    return next(
-      errorHandler(400, "Reg. Number can only contain letters and numbers")
-    );
-  }
+
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.userId,
