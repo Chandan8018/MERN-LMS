@@ -83,33 +83,25 @@ export default function AddBook() {
   };
 
   return (
-    <div className=' flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+    <div className='max-w-3xl mx-auto min-h-screen'>
+      <h1 className='text-3xl font-bold text-center my-7 dark:text-white'>
+        Add a new book
+      </h1>
       <form className='flex flex-col gap-4' onSubmit={handleUploadSubmit}>
-        <h1 className='text-3xl font-bold text-center my-7 dark:text-white'>
-          Add a new book
-        </h1>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        <div className='flex flex-col gap-2 sm:flex-row justify-between'>
           <TextInput
             id='title'
             type='text'
             placeholder='Book name'
             required
-            className='flex-1 font-bold'
+            className='font-bold w-full'
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
           />
-          <TextInput
-            id='qty'
-            type='number'
-            placeholder='Quantity'
-            min={1}
-            max={100}
-            onChange={(e) => setFormData({ ...formData, qty: e.target.value })}
-          />
+
           <Select
             onChange={(e) => {
-              console.log(e.target.value);
               setFormData({ ...formData, category: e.target.value });
             }}
           >
@@ -123,6 +115,30 @@ export default function AddBook() {
             <option value='Entertainment'>Entertainment</option>
             <option value='Other'>Other</option>
           </Select>
+        </div>
+        <div className='flex flex-col gap-2 sm:flex-row justify-between'>
+          <TextInput
+            id='ISBN'
+            type='text'
+            placeholder='ISBN Number'
+            onChange={(e) => setFormData({ ...formData, ISBN: e.target.value })}
+          />
+          <TextInput
+            id='author'
+            type='text'
+            placeholder='Author Name'
+            onChange={(e) =>
+              setFormData({ ...formData, authorname: e.target.value })
+            }
+          />
+          <TextInput
+            id='qty'
+            type='number'
+            placeholder='Qyt'
+            min={1}
+            max={100}
+            onChange={(e) => setFormData({ ...formData, qty: e.target.value })}
+          />
         </div>
         <div className='flex gap-4 items-center justify-between border-4 rounded-md border-teal-500 border-dotted p-5'>
           <FileInput

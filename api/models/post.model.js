@@ -24,6 +24,14 @@ const postSchema = new mongoose.Schema(
       type: String,
       default: "uncategorized",
     },
+    authorname: {
+      type: String,
+      default: "Anonymous",
+    },
+    ISBN: {
+      type: String,
+      default: "None",
+    },
     qty: {
       type: Number,
       default: 1,

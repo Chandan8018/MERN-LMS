@@ -116,7 +116,7 @@ export default function UpdateBook() {
         Update post
       </h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        <div className='flex-1 flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             type='text'
             placeholder='Title'
@@ -127,15 +127,6 @@ export default function UpdateBook() {
               setFormData({ ...formData, title: e.target.value })
             }
             value={formData.title}
-          />
-          <TextInput
-            id='qty'
-            type='number'
-            placeholder='Quantity'
-            min={1}
-            max={100}
-            onChange={(e) => setFormData({ ...formData, qty: e.target.value })}
-            value={formData.qty}
           />
           <Select
             onChange={(e) =>
@@ -153,6 +144,33 @@ export default function UpdateBook() {
             <option value='Entertainment'>Entertainment</option>
             <option value='Other'>Other</option>
           </Select>
+        </div>
+        <div className='flex flex-col gap-4'>
+          <TextInput
+            id='ISBN'
+            type='text'
+            placeholder='ISBN Number'
+            onChange={(e) => setFormData({ ...formData, ISBN: e.target.value })}
+            value={formData.ISBN}
+          />
+          <TextInput
+            id='author'
+            type='text'
+            placeholder='Author Name'
+            onChange={(e) =>
+              setFormData({ ...formData, authorname: e.target.value })
+            }
+            value={formData.authorname}
+          />
+          <TextInput
+            id='qty'
+            type='number'
+            placeholder='Qty'
+            min={1}
+            max={100}
+            onChange={(e) => setFormData({ ...formData, qty: e.target.value })}
+            value={formData.qty}
+          />
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
           <FileInput

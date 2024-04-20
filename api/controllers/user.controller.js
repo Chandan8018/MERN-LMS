@@ -143,3 +143,17 @@ export const getUser = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUserDetail = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ regdNumber: req.params.regdNumber });
+    if (!user) {
+      return next(errorHandler(404, "User not found"));
+    }
+    const { password, ...rest } = user._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};

@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema(
     },
     regdNumber: {
       type: String,
-      unique: true,
       default: null,
     },
   },

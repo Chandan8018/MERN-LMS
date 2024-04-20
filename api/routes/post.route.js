@@ -3,6 +3,7 @@ import { verifyToken } from "../utils/verifyUser.js";
 import {
   create,
   deletepost,
+  getPost,
   getposts,
   updatepost,
 } from "../controllers/post.controller.js";
@@ -13,4 +14,5 @@ router.post("/create", verifyToken, create);
 router.get("/getPosts", getposts);
 router.delete("/deletepost/:postId/:userId", verifyToken, deletepost);
 router.put("/updatebook/:postId/:userId", verifyToken, updatepost);
+router.get("/:postId", getPost);
 export default router;

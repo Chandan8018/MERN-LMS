@@ -80,9 +80,11 @@ export default function DashAllBooks() {
           <Table hoverable className='shadow-md'>
             <Table.Head>
               <Table.HeadCell>Date updated</Table.HeadCell>
+              <Table.HeadCell>ISBN</Table.HeadCell>
               <Table.HeadCell>Book Cover</Table.HeadCell>
               <Table.HeadCell>Book Name</Table.HeadCell>
               <Table.HeadCell>Category</Table.HeadCell>
+              <Table.HeadCell>Author</Table.HeadCell>
               <Table.HeadCell>Available Copies</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
               <Table.HeadCell>
@@ -95,12 +97,13 @@ export default function DashAllBooks() {
                   <Table.Cell>
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
+                  <Table.Cell>{post.ISBN}</Table.Cell>
                   <Table.Cell>
                     <Link to={`/book-post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
-                        className='w-10 h-10 md:h-20 md:w-20 object-cover bg-gray-500 rounded-xl shadow-xl shadow-slate-700'
+                        className='w-10 md:w-20 object-cover bg-gray-500 rounded-xl shadow-xl shadow-slate-700'
                       />
                     </Link>
                   </Table.Cell>
@@ -113,6 +116,7 @@ export default function DashAllBooks() {
                     </Link>
                   </Table.Cell>
                   <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell>{post.authorname}</Table.Cell>
                   <Table.Cell>{post.qty}</Table.Cell>
                   <Table.Cell>
                     <span
@@ -151,9 +155,11 @@ export default function DashAllBooks() {
           <Table hoverable className='shadow-md'>
             <Table.Head>
               <Table.HeadCell>Date updated</Table.HeadCell>
+              <Table.HeadCell>ISBN</Table.HeadCell>
               <Table.HeadCell>Book Cover</Table.HeadCell>
               <Table.HeadCell>Book Name</Table.HeadCell>
               <Table.HeadCell>Category</Table.HeadCell>
+              <Table.HeadCell>Author</Table.HeadCell>
               <Table.HeadCell>Available Copies</Table.HeadCell>
               <Table.HeadCell>wishlist</Table.HeadCell>
             </Table.Head>
@@ -163,6 +169,7 @@ export default function DashAllBooks() {
                   <Table.Cell>
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
+                  <Table.Cell>{post.ISBN}</Table.Cell>
                   <Table.Cell>
                     <Link to={`/book-post/${post.slug}`}>
                       <img
@@ -181,6 +188,7 @@ export default function DashAllBooks() {
                     </Link>
                   </Table.Cell>
                   <Table.Cell>{post.category}</Table.Cell>
+                  <Table.Cell>{post.authorname}</Table.Cell>
                   <Table.Cell>{post.qty}</Table.Cell>
                   <Table.Cell>
                     <BsBagHeartFill />

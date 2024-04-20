@@ -36,6 +36,8 @@ export const getposts = async (req, res, next) => {
         ...(req.query.userId && { userId: req.query.userId }),
         ...(req.query.category && { category: req.query.category }),
         ...(req.query.qty && { qty: req.query.qty }),
+        ...(req.query.ISBN && { ISBN: req.query.ISBN }),
+        ...(req.query.authorname && { authorname: req.query.authorname }),
         ...(req.query.slug && { slug: req.query.slug }),
         ...(req.query.postId && { _id: req.query.postId }),
         ...(req.query.searchTerm && {
@@ -95,12 +97,26 @@ export const updatepost = async (req, res, next) => {
           content: req.body.content,
           category: req.body.category,
           qty: req.body.qty,
+          authorname: req.body.authorname,
+          ISBN: req.body.ISBN,
           image: req.body.image,
         },
       },
       { new: true }
     );
     res.status(200).json(updatedPost);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getPost = async (req, res, next) => {
+  try {
+    const postData = await post.findById(req.params.postId);
+    if (!postData) {
+      return next(errorHandler(404, "Post not found"));
+    }
+    res.status(200).json(postData);
   } catch (error) {
     next(error);
   }
