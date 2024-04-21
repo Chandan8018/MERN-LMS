@@ -40,6 +40,7 @@ export default function DashProfile() {
   const filePickerRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [libraryCard, setLibraryCard] = useState(false);
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -176,6 +177,16 @@ export default function DashProfile() {
       <h1 className='my-7 text-center font-semibold text-3xl dark:text-white'>
         Profile
       </h1>
+      <Button
+        type='button'
+        className='text-black bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] font-bold hover:text-teal-800 shadow-sm shadow-black md:absolute md:top-20 md:left-64 '
+        onClick={() => {
+          setLibraryCard(true);
+          navigate("/dashboard?tab=library-card");
+        }}
+      >
+        View Library Card
+      </Button>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
           type='file'

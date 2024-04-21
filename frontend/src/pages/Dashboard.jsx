@@ -9,6 +9,7 @@ import BookBorrow from "./BookBorrow";
 import DashComments from "../components/DashComments";
 import DashboardComp from "../components/DashboardComp";
 import DashStudents from "../components/DashStudents";
+import LibraryCard from "./students/LibraryCard";
 
 export default function Dashboard() {
   const location = useLocation();
@@ -49,6 +50,9 @@ export default function Dashboard() {
 
         {/* Issues Dashboard Component */}
         {tab === "students" && <DashStudents />}
+
+        {/* Library Card */}
+        {tab === "library-card" && <LibraryCard />}
       </div>
     </>
   );
