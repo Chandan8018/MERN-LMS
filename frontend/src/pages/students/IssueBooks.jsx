@@ -1,4 +1,4 @@
-import { Banner, Button, Table, TextInput } from "flowbite-react";
+import { Alert, Banner, Button, Table, TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,14 +6,13 @@ import { Link } from "react-router-dom";
 export default function IssueBooks() {
   const [regdNumber, setRegdNumber] = useState("");
   const [user, setUser] = useState({});
-  const [userError, setUserError] = useState(null);
   const [findUser, setFindUser] = useState(false);
   const [selectBooks, setSelectBooks] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
   const { currentUser } = useSelector((state) => state.user);
-  const [borrowBook, setBorrowBook] = useState("");
-
+  const [borrowBookId, setBorrowBookId] = useState("");
+  const [bookAndUserDetails, setBookAndUserDetails] = useState({});
   const handleSearch = async () => {
     try {
       const res = await fetch(`/api/user/search/${regdNumber}`);
@@ -23,7 +22,7 @@ export default function IssueBooks() {
         setUser(data);
       }
     } catch (error) {
-      setUserError(error.message);
+      console.log(error.message);
       setFindUser(false);
     }
   };
@@ -43,7 +42,6 @@ export default function IssueBooks() {
         console.log(error.message);
       }
     };
-
     fetchPosts();
   }, [selectBooks]);
 
@@ -65,9 +63,22 @@ export default function IssueBooks() {
     }
   };
 
-  const handleAssign = (bookId) => {
-    setBorrowBook(bookId);
-  };
+  useEffect(() => {
+    const fetchBorrowedBook = async () => {
+      setSelectBooks(false);
+      try {
+        const res = await fetch(`/api/post/${borrowBookId}`);
+        const data = await res.json();
+        if (res.ok) {
+          setBookAndUserDetails({ ...data, ...user });
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchBorrowedBook();
+  }, [borrowBookId]);
+
   return (
     <div className=' mx-auto'>
       <div className='max-w-md mx-auto flex my-5'>
@@ -92,13 +103,6 @@ export default function IssueBooks() {
         >
           search
         </Button>
-        <div>
-          {userError && (
-            <Alert color='failure' className='mt-5'>
-              {userError}
-            </Alert>
-          )}
-        </div>
       </div>
       <div className='table-auto overflow-x-auto overflow-y-hidden md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
         {findUser && (
@@ -179,7 +183,7 @@ export default function IssueBooks() {
                       <Button
                         type='button'
                         gradientDuoTone='purpleToPink'
-                        onClick={() => handleAssign(post._id)}
+                        onClick={() => setBorrowBookId(post._id)}
                       >
                         Assign
                       </Button>
