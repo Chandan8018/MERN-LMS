@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { BsBagHeartFill } from "react-icons/bs";
 
 export default function DashAllBooks() {
   const { currentUser } = useSelector((state) => state.user);
@@ -161,7 +160,6 @@ export default function DashAllBooks() {
               <Table.HeadCell>Category</Table.HeadCell>
               <Table.HeadCell>Author</Table.HeadCell>
               <Table.HeadCell>Available Copies</Table.HeadCell>
-              <Table.HeadCell>wishlist</Table.HeadCell>
             </Table.Head>
             {userPosts.map((post) => (
               <Table.Body className='divide-y'>
@@ -190,9 +188,6 @@ export default function DashAllBooks() {
                   <Table.Cell>{post.category}</Table.Cell>
                   <Table.Cell>{post.authorname}</Table.Cell>
                   <Table.Cell>{post.qty}</Table.Cell>
-                  <Table.Cell>
-                    <BsBagHeartFill />
-                  </Table.Cell>
                 </Table.Row>
               </Table.Body>
             ))}

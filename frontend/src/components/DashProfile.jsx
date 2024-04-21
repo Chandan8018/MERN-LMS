@@ -40,7 +40,6 @@ export default function DashProfile() {
   const filePickerRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [libraryCard, setLibraryCard] = useState(false);
 
   const handleImageChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -181,7 +180,6 @@ export default function DashProfile() {
         type='button'
         className='text-black bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] font-bold hover:text-teal-800 shadow-sm shadow-black md:absolute md:top-20 md:left-64 '
         onClick={() => {
-          setLibraryCard(true);
           navigate("/dashboard?tab=library-card");
         }}
       >
@@ -249,16 +247,7 @@ export default function DashProfile() {
           defaultValue={currentUser.email}
           onChange={handleChange}
         />
-        {!currentUser.isAdmin && (
-          <TextInput
-            type='text'
-            id='regdNumber'
-            placeholder='Registration Number'
-            addon=<MdNumbers size='20' />
-            defaultValue={currentUser.regdNumber}
-            onChange={handleChange}
-          />
-        )}
+
         <TextInput
           type='password'
           id='password'

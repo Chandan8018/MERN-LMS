@@ -36,9 +36,9 @@ export default function LibraryCard() {
           <div className='mt-4 flex lg:mt-6' onClick={() => setActive(true)}>
             <a
               href='#'
-              className='inline-flex items-center rounded-lg bg-cyan-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800'
+              className='inline-flex items-center rounded-lg bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] px-4 py-2 text-center text-sm font-medium text-black hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800'
             >
-              Active
+              Active Now
             </a>
           </div>
         )}

@@ -26,6 +26,7 @@ export const signup = async (req, res, next) => {
     username,
     email,
     password: hashedPassword,
+    regdNumber: Math.random().toString(36).slice(-8),
   });
 
   try {
@@ -97,6 +98,7 @@ export const googleAuth = async (req, res, next) => {
         email,
         password: hashedPassword,
         profilePicture: googlePhotoUrl,
+        regdNumber: Math.random().toString(36).slice(-8),
       });
 
       await newUser.save();
