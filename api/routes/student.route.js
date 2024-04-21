@@ -5,6 +5,6 @@ import { create } from "../controllers/student.controller.js";
 const router = express.Router();
 
 // router.get("/getstudents",  getstudent);
-router.post("/create", verifyToken, create);
+router.post("/borrowbook/create", verifyToken, create);
 
 export default router;

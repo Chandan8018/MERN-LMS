@@ -2,15 +2,24 @@ import mongoose from "mongoose";
 
 const studentBorrowSchema = new mongoose.Schema(
   {
-    userId: {
+    studentId: {
       type: String,
       required: true,
     },
-    postId: {
+    studentName: {
+      type: String,
+    },
+    studentImage: {
+      type: String,
+    },
+    bookId: {
       type: String,
       required: true,
     },
     bookname: {
+      type: String,
+    },
+    bookImage: {
       type: String,
     },
     ISBNNumber: {
@@ -21,18 +30,8 @@ const studentBorrowSchema = new mongoose.Schema(
     },
     quantity: {
       type: String,
-      default: "1",
-    },
-    daysborrow: {
-      type: String,
-    },
-    studentName: {
-      type: String,
     },
     status: {
-      type: String,
-    },
-    regdNumber: {
       type: String,
     },
   },
