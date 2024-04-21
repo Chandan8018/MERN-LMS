@@ -1,18 +1,24 @@
-import { Alert, Banner, Button, Table, TextInput } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import { Alert, Button, Modal, Table, TextInput } from "flowbite-react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function IssueBooks() {
+  const { currentUser } = useSelector((state) => state.user);
   const [regdNumber, setRegdNumber] = useState("");
   const [user, setUser] = useState({});
   const [findUser, setFindUser] = useState(false);
   const [selectBooks, setSelectBooks] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  const { currentUser } = useSelector((state) => state.user);
-  const [borrowBookId, setBorrowBookId] = useState("");
-  const [bookAndUserDetails, setBookAndUserDetails] = useState({});
+  const [borrowBookDetails, setBorrowBookDetails] = useState({});
+  const [publishError, setPublishError] = useState(null);
+  const [bookIssueUnsuccessfully, setBookIssueUnsuccessfully] = useState(false);
+  const [bookIssuedSuccessfully, setBookIssuedSuccessfully] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  //fetch student by using regd number
   const handleSearch = async () => {
     try {
       const res = await fetch(`/api/user/search/${regdNumber}`);
@@ -22,29 +28,29 @@ export default function IssueBooks() {
         setUser(data);
       }
     } catch (error) {
-      console.log(error.message);
+      setPublishError(error.message);
       setFindUser(false);
     }
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`/api/post/getposts`);
-        const data = await res.json();
-        if (res.ok) {
-          setUserPosts(data.posts);
-          if (data.posts.length < 9) {
-            setShowMore(false);
-          }
+  //fetch all books from data base
+  const handleFetchPosts = async () => {
+    setSelectBooks(true);
+    try {
+      const res = await fetch(`/api/post/getposts`);
+      const data = await res.json();
+      if (res.ok) {
+        setUserPosts(data.posts);
+        if (data.posts.length < 9) {
+          setShowMore(false);
         }
-      } catch (error) {
-        console.log(error.message);
       }
-    };
-    fetchPosts();
-  }, [selectBooks]);
+    } catch (error) {
+      setPublishError(error.message);
+    }
+  };
 
+  //handle show more button
   const handleShowMore = async () => {
     const startIndex = userPosts.length;
     try {
@@ -59,25 +65,97 @@ export default function IssueBooks() {
         }
       }
     } catch (error) {
-      console.log(error.message);
+      setPublishError(error.message);
     }
   };
 
-  useEffect(() => {
-    const fetchBorrowedBook = async () => {
-      setSelectBooks(false);
-      try {
-        const res = await fetch(`/api/post/${borrowBookId}`);
-        const data = await res.json();
-        if (res.ok) {
-          setBookAndUserDetails({ ...data, ...user });
-        }
-      } catch (error) {
-        console.log(error.message);
+  //get book details by using book id
+  const handelBorrowedBook = async (borrowBookId) => {
+    if (!borrowBookId) return;
+    setSelectBooks(false);
+    try {
+      const res = await fetch(`/api/post/${borrowBookId}`);
+      const data = await res.json();
+      if (res.ok) {
+        setBorrowBookDetails(data);
       }
-    };
-    fetchBorrowedBook();
-  }, [borrowBookId]);
+    } catch (error) {
+      setPublishError(error.message);
+    }
+  };
+
+  // create student details and borrow book details docoment in mongo db
+  const handleUploadDataInDatabase = async () => {
+    try {
+      const res = await fetch("/api/student/borrowbook/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          studentId: user._id,
+          studentName: user.username,
+          studentImage: user.profilePicture,
+          bookId: borrowBookDetails._id,
+          bookname: borrowBookDetails.title,
+          bookImage: borrowBookDetails.image,
+          ISBN: borrowBookDetails.ISBN,
+          authorname: borrowBookDetails.authorname,
+          quantity: 1,
+          status: "borrowed",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setBookIssueUnsuccessfully(true);
+        setPublishError(data.message);
+        return;
+      }
+
+      if (res.ok) {
+        setBookIssueUnsuccessfully(false);
+        setPublishError(null);
+        setFindUser(false);
+        setBookIssuedSuccessfully(true);
+        setRegdNumber("");
+        setShowModal(false);
+      }
+    } catch (error) {
+      setBookIssueUnsuccessfully(true);
+      setPublishError("Something went wrong last", error);
+    }
+  };
+
+  //After student borrow book update book quantity in mongo db
+  const handleBookQtyUpdate = async () => {
+    console.log(borrowBookDetails._id);
+    if (!borrowBookDetails._id) return;
+    try {
+      const res = await fetch(
+        `/api/post/updatebook/${borrowBookDetails._id}/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            qty: borrowBookDetails.qty - 1,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        setPublishError(data.message);
+        return;
+      }
+
+      if (res.ok) {
+        setPublishError(null);
+      }
+    } catch (error) {
+      setPublishError("Something went wrong");
+    }
+  };
 
   return (
     <div className=' mx-auto'>
@@ -93,7 +171,10 @@ export default function IssueBooks() {
           }}
           className=' flex-1 outline-none'
           value={regdNumber}
-          onChange={(e) => setRegdNumber(e.target.value)}
+          onChange={(e) => {
+            setBookIssuedSuccessfully(false);
+            setRegdNumber(e.target.value);
+          }}
         />
         <Button
           type='button'
@@ -104,14 +185,24 @@ export default function IssueBooks() {
           search
         </Button>
       </div>
+      {bookIssuedSuccessfully && (
+        <Alert className='my-5' color='success'>
+          Book Issued Successfully
+        </Alert>
+      )}
+      {bookIssueUnsuccessfully && (
+        <Alert className='my-5' color='failure'>
+          {publishError}
+        </Alert>
+      )}
       <div className='table-auto overflow-x-auto overflow-y-hidden md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
         {findUser && (
           <Table hoverable>
             <Table.Head>
-              <Table.HeadCell>User image</Table.HeadCell>
-              <Table.HeadCell>Username</Table.HeadCell>
+              <Table.HeadCell>Student image</Table.HeadCell>
+              <Table.HeadCell>Student Name</Table.HeadCell>
               <Table.HeadCell>Registration Number</Table.HeadCell>
-              <Table.HeadCell>Assign Book</Table.HeadCell>
+              <Table.HeadCell>Select Book</Table.HeadCell>
             </Table.Head>
 
             <Table.Body className='divide-y'>
@@ -129,7 +220,7 @@ export default function IssueBooks() {
                   <Button
                     type='button'
                     gradientDuoTone='purpleToPink'
-                    onClick={() => setSelectBooks(true)}
+                    onClick={handleFetchPosts}
                   >
                     Select Book
                   </Button>
@@ -183,7 +274,10 @@ export default function IssueBooks() {
                       <Button
                         type='button'
                         gradientDuoTone='purpleToPink'
-                        onClick={() => setBorrowBookId(post._id)}
+                        onClick={() => {
+                          setShowModal(true);
+                          handelBorrowedBook(post._id);
+                        }}
                       >
                         Assign
                       </Button>
@@ -202,6 +296,43 @@ export default function IssueBooks() {
             )}
           </>
         )}
+
+        <Modal
+          show={showModal}
+          onClose={() => setShowModal(false)}
+          popup
+          size='md'
+        >
+          <Modal.Header />
+          <Modal.Body>
+            <div className='text-center'>
+              <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+              <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+                Are you sure you want to assign this book to {user.username}?
+              </h3>
+              <div className='flex justify-center gap-4'>
+                <Button
+                  color='success'
+                  onClick={() => {
+                    handleBookQtyUpdate();
+                    handleUploadDataInDatabase();
+                    setShowModal(false);
+                  }}
+                >
+                  Yes, I'm sure
+                </Button>
+                <Button
+                  color='failure'
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  No, cancel
+                </Button>
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
       </div>
     </div>
   );

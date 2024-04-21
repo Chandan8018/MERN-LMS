@@ -22,14 +22,14 @@ const studentBorrowSchema = new mongoose.Schema(
     bookImage: {
       type: String,
     },
-    ISBNNumber: {
+    ISBN: {
       type: String,
     },
     authorname: {
       type: String,
     },
     quantity: {
-      type: String,
+      type: Number,
     },
     status: {
       type: String,
