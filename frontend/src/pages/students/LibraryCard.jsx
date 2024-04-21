@@ -21,10 +21,15 @@ export default function LibraryCard() {
           className='mb-3 rounded-full shadow-lg'
         />
         {active && (
-          <h5 className='mb-1 text-xl font-medium text-blue-600 dark:text-blue-500'>
-            <span className='text-gray-900 dark:text-white'>LCN:</span>{" "}
-            {currentUser?.regdNumber}
-          </h5>
+          <>
+            <h5 className='mb-1 text-xl font-medium text-blue-600 dark:text-blue-500'>
+              <span className='text-gray-900 dark:text-white'>LCN:</span>{" "}
+              {currentUser?.regdNumber}
+            </h5>
+            <span className='text-sm text-gray-500 dark:text-gray-400'>
+              {new Date().getFullYear()} - {new Date().getFullYear() + 1}
+            </span>
+          </>
         )}
         <h5 className='mb-1 text-xl font-medium text-gray-900 dark:text-white'>
           {currentUser?.username}
