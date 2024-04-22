@@ -29,8 +29,12 @@ export default function Home() {
   return (
     <div className='main min-h-screen bg-[#BEBFC3] dark:bg-gray-900'>
       <div className='h-64 sm:h-80 xl:h-96 bg-[#FDFBFC]'>
-        <Carousel pauseOnHover>
-          <img src='https://i.imgur.com/3dRgsnq.jpeg ' alt='Image 2' />
+        <Carousel pauseOnHover style={{ borderRadius: "none" }}>
+          <img
+            src='https://i.imgur.com/3dRgsnq.jpeg '
+            alt='Image 2'
+            className='border-r-0'
+          />
           <img src='https://i.imgur.com/QJG67Dr.jpeg ' alt='Image 2' />
           <img src='https://i.imgur.com/Q4ziDQr.jpeg ' alt='Image 3' />
           <img src='https://i.imgur.com/oOMwTl6.jpeg ' alt='Image 3' />

@@ -60,6 +60,7 @@ export default function IssuedBookToStudents() {
         <>
           <Table hoverable className='shadow-md mt-5'>
             <Table.Head>
+              <Table.HeadCell>Lib. Card no</Table.HeadCell>
               <Table.HeadCell>Students Image</Table.HeadCell>
               <Table.HeadCell>Students Name</Table.HeadCell>
               <Table.HeadCell>Books Image</Table.HeadCell>
@@ -71,6 +72,7 @@ export default function IssuedBookToStudents() {
             {studentBorrowBooks.map((borrowBook) => (
               <Table.Body className='divide-y' key={borrowBook._id}>
                 <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800 '>
+                  <Table.Cell>{borrowBook.regdNumber}</Table.Cell>
                   <Table.Cell>
                     <img
                       src={borrowBook.studentImage}

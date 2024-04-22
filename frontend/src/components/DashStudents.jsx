@@ -11,12 +11,12 @@ export default function DashStudents() {
       style='underline'
       className=' bg-white dark:bg-black w-full'
     >
-      <Tabs.Item title='Issue Books' icon={GiSpellBook}>
-        <IssueBooks />
-      </Tabs.Item>
-
       <Tabs.Item active title='Issued Books To Students' icon={GiBookshelf}>
         <IssuedBookToStudents />
+      </Tabs.Item>
+
+      <Tabs.Item title='Issue Books' icon={GiSpellBook}>
+        <IssueBooks />
       </Tabs.Item>
 
       <Tabs.Item title='Returned Books' icon={GiWhiteBook}>

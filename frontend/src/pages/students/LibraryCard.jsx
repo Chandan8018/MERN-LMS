@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card } from "flowbite-react";
+import { Avatar, Card } from "flowbite-react";
 import { useSelector } from "react-redux";
 import image from "../../assets/logo2.png";
 
@@ -7,7 +7,7 @@ export default function LibraryCard() {
   const { currentUser } = useSelector((state) => state.user);
   const [active, setActive] = useState(false);
   return (
-    <Card className='max-w-sm max-h-[360px] mx-auto mt-20 '>
+    <Card className='max-w-sm max-h-[360px] mx-auto mt-20 sm:mb-5 shadow-lg shadow-black'>
       <div className='flex flex-col items-center '>
         <h3 className='mb-1 text-2xl font-medium text-blue-600 dark:text-blue-500 mt-[-20px]'>
           ✦✦ Library Card ✦✦

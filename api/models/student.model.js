@@ -12,6 +12,9 @@ const studentBorrowSchema = new mongoose.Schema(
     studentImage: {
       type: String,
     },
+    regdNumber: {
+      type: String,
+    },
     bookId: {
       type: String,
       required: true,

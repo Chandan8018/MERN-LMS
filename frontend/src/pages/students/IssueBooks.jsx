@@ -96,12 +96,14 @@ export default function IssueBooks() {
           studentId: user._id,
           studentName: user.username,
           studentImage: user.profilePicture,
+          regdNumber: user.regdNumber,
           bookId: borrowBookDetails._id,
           bookname: borrowBookDetails.title,
           bookImage: borrowBookDetails.image,
           ISBN: borrowBookDetails.ISBN,
           authorname: borrowBookDetails.authorname,
           quantity: 1,
+
           status: "borrowed",
         }),
       });
@@ -163,7 +165,7 @@ export default function IssueBooks() {
         <TextInput
           id='search'
           type='text'
-          placeholder='Enter Student Registration Number here...'
+          placeholder='Enter Student Library Card Number here...'
           required
           style={{
             borderTopRightRadius: 0,
@@ -201,7 +203,7 @@ export default function IssueBooks() {
             <Table.Head>
               <Table.HeadCell>Student image</Table.HeadCell>
               <Table.HeadCell>Student Name</Table.HeadCell>
-              <Table.HeadCell>Registration Number</Table.HeadCell>
+              <Table.HeadCell>Library Card Number</Table.HeadCell>
               <Table.HeadCell>Select Book</Table.HeadCell>
             </Table.Head>
 
