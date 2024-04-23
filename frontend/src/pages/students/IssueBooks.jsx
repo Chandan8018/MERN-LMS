@@ -69,6 +69,26 @@ export default function IssueBooks() {
     }
   };
 
+  const handelBorrowBook = async (postId) => {
+    try {
+      const res = await fetch(`/api/student/getstudents/${regdNumber}`);
+      const data = await res.json();
+      if (res.ok) {
+        data.map((student) => {
+          if (student.bookId === postId) {
+            setShowModal(false);
+            setPublishError(`Already Issued Book to ${user.username}`);
+            setBookIssueUnsuccessfully(true);
+            return;
+          }
+        });
+      }
+    } catch (error) {
+      setReturnError(error.message);
+      setBookIssueUnsuccessfully(true);
+    }
+  };
+
   //get book details by using book id
   const handelBorrowedBook = async (borrowBookId) => {
     if (!borrowBookId) return;
@@ -84,7 +104,7 @@ export default function IssueBooks() {
     }
   };
 
-  // create student details and borrow book details docoment in mongo db
+  // create student details and borrow book details add docoment in mongo db
   const handleUploadDataInDatabase = async () => {
     try {
       const res = await fetch("/api/student/borrowbook/create", {
@@ -187,12 +207,12 @@ export default function IssueBooks() {
         </Button>
       </div>
       {bookIssuedSuccessfully && (
-        <Alert className='my-5' color='success'>
+        <Alert className='m-3' color='success'>
           Book Issued Successfully
         </Alert>
       )}
       {bookIssueUnsuccessfully && (
-        <Alert className='my-5' color='failure'>
+        <Alert className='m-3' color='failure'>
           {publishError}
         </Alert>
       )}
@@ -276,6 +296,7 @@ export default function IssueBooks() {
                         type='button'
                         gradientDuoTone='purpleToPink'
                         onClick={() => {
+                          handelBorrowBook(post._id);
                           setShowModal(true);
                           handelBorrowedBook(post._id);
                         }}
