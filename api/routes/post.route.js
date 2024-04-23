@@ -15,4 +15,5 @@ router.get("/getPosts", getposts);
 router.delete("/deletepost/:postId/:userId", verifyToken, deletepost);
 router.put("/updatebook/:postId/:userId", verifyToken, updatepost);
 router.get("/:postId", getPost);
+
 export default router;

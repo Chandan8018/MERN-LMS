@@ -1,4 +1,4 @@
-import { Button, Modal, Table, TextInput } from "flowbite-react";
+import { Alert, Button, Modal, Table, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
@@ -6,10 +6,17 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 export default function ReturnedBooks() {
   const { currentUser } = useSelector((state) => state.user);
   const [regdNumber, setRegdNumber] = useState("");
-  const [studentBorrowBooks, setStudentBorrowBooks] = useState({});
+  const [studentBorrowBooks, setStudentBorrowBooks] = useState([]);
   const [searchByRegd, setSearchByRegd] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  console.log(studentBorrowBooks);
+  const [BorrowBookId, setBorrowBookId] = useState(null);
+  const [returnError, setReturnError] = useState(null);
+  const [bookReturnUnsuccessfully, setBookReturnUnsuccessfully] =
+    useState(false);
+  const [bookReturnedSuccessfully, setBookReturnedSuccessfully] =
+    useState(false);
+  const [bookData, setBookData] = useState({});
+
   const handelBorrowBook = async () => {
     try {
       const res = await fetch(`/api/student/getstudents/${regdNumber}`);
@@ -19,7 +26,8 @@ export default function ReturnedBooks() {
         setSearchByRegd(true);
       }
     } catch (error) {
-      console.log(error.message);
+      setReturnError(error.message);
+      setBookReturnUnsuccessfully(true);
     }
   };
 
@@ -31,6 +39,71 @@ export default function ReturnedBooks() {
     const localizedDateAfter15Days = dateAfter15Days.toLocaleDateString();
     return localizedDateAfter15Days;
   };
+
+  const handleReturnBook = async () => {
+    try {
+      const res = await fetch(`/api/student/return/${BorrowBookId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setStudentBorrowBooks((prev) =>
+          prev.filter(
+            (studentBorrowBooks) => studentBorrowBooks._id !== BorrowBookId
+          )
+        );
+        setShowModal(false);
+        setBookReturnedSuccessfully(true);
+      } else {
+        setReturnError(data.message);
+        setBookReturnUnsuccessfully(true);
+      }
+    } catch (error) {
+      setReturnError(error.message);
+      setBookReturnUnsuccessfully(true);
+    }
+  };
+
+  const handelBookQty = async (bookId) => {
+    try {
+      const res = await fetch(`/api/post/${bookId}`);
+      const data = await res.json();
+      if (res.ok) {
+        setBookData(data);
+      }
+    } catch (error) {
+      setReturnError(error.message);
+    }
+  };
+
+  const handleBookQtyUpdate = async () => {
+    try {
+      const res = await fetch(
+        `/api/post/updatebook/${bookData._id}/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            qty: bookData.qty + 1,
+          }),
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) {
+        setPublishError(data.message);
+        return;
+      }
+
+      if (res.ok) {
+        setPublishError(null);
+      }
+    } catch (error) {
+      setPublishError("Something went wrong");
+    }
+  };
+
   return (
     <div className=' '>
       <div className='max-w-md mx-auto flex my-5'>
@@ -48,6 +121,8 @@ export default function ReturnedBooks() {
           onChange={(e) => {
             setRegdNumber(e.target.value);
             setSearchByRegd(false);
+            setBookReturnedSuccessfully(false);
+            setBookReturnUnsuccessfully(false);
           }}
         />
         <Button
@@ -59,7 +134,16 @@ export default function ReturnedBooks() {
           search
         </Button>
       </div>
-
+      {bookReturnedSuccessfully && (
+        <Alert className='my-5' color='success'>
+          Book Returned Successfully
+        </Alert>
+      )}
+      {bookReturnUnsuccessfully && (
+        <Alert className='my-5' color='failure'>
+          {returnError}
+        </Alert>
+      )}
       <div className=' md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
         {currentUser.isAdmin && searchByRegd && (
           <Table hoverable className='shadow-md mt-5'>
@@ -103,55 +187,60 @@ export default function ReturnedBooks() {
                     <Table.Cell>
                       <Button
                         gradientDuoTone='purpleToPink'
-                        onClick={() => setShowModal(true)}
+                        onClick={() => {
+                          setBorrowBookId(borrowBook._id);
+                          handelBookQty(borrowBook.bookId);
+                          setBookReturnedSuccessfully(false);
+                          setShowModal(true);
+                        }}
                       >
                         Return
                       </Button>
                     </Table.Cell>
                   </Table.Row>
                 </Table.Body>
-
-                {/* Modal */}
-                <Modal
-                  show={showModal}
-                  onClose={() => setShowModal(false)}
-                  popup
-                  size='md'
-                >
-                  <Modal.Header />
-                  <Modal.Body>
-                    <div className='text-center'>
-                      <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-                      <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-                        Are you sure {borrowBook.studentName} wants to return
-                        this book?
-                      </h3>
-                      <div className='flex justify-center gap-4'>
-                        <Button
-                          color='failure'
-                          onClick={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          Yes, I'm sure
-                        </Button>
-                        <Button
-                          color='gray'
-                          onClick={() => {
-                            setShowModal(false);
-                          }}
-                        >
-                          No, cancel
-                        </Button>
-                      </div>
-                    </div>
-                  </Modal.Body>
-                </Modal>
               </>
             ))}
           </Table>
         )}
       </div>
+      {/* Modal */}
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size='md'
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className='text-center'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
+            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
+              Are you sure this student wants to return this book?
+            </h3>
+            <div className='flex justify-center gap-4'>
+              <Button
+                color='failure'
+                onClick={() => {
+                  setShowModal(false);
+                  handleReturnBook();
+                  handleBookQtyUpdate();
+                }}
+              >
+                Yes, I'm sure
+              </Button>
+              <Button
+                color='gray'
+                onClick={() => {
+                  setShowModal(false);
+                }}
+              >
+                No, cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

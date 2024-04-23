@@ -13,6 +13,6 @@ const router = express.Router();
 router.post("/borrowbook/create", verifyToken, create);
 router.get("/getstudentborrowbooks", verifyToken, getstudentborrowbooks);
 router.get("/getstudents/:regdNumber", verifyToken, getstudentwithborrowbooks);
-router.delete("/return/:studentId", verifyToken, deleteBorrowedBook);
+router.delete("/return/:studentBorrowId", verifyToken, deleteBorrowedBook);
 
 export default router;
