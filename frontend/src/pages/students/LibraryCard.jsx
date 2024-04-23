@@ -14,10 +14,10 @@ export default function LibraryCard() {
         </h3>
         <img src={image} className='h-20 mt-[-10px]' />
         <img
-          alt='Bonnie image'
-          height='96'
+          alt={currentUser?.username}
+          height='60'
           src={currentUser?.profilePicture}
-          width='96'
+          width='60'
           className='mb-3 rounded-full shadow-lg'
         />
         {active && (

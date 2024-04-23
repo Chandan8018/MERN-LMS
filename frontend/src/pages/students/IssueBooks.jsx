@@ -130,7 +130,6 @@ export default function IssueBooks() {
 
   //After student borrow book update book quantity in mongo db
   const handleBookQtyUpdate = async () => {
-    console.log(borrowBookDetails._id);
     if (!borrowBookDetails._id) return;
     try {
       const res = await fetch(
@@ -197,7 +196,7 @@ export default function IssueBooks() {
           {publishError}
         </Alert>
       )}
-      <div className='table-auto overflow-x-auto overflow-y-hidden md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+      <div className='table-auto md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
         {findUser && (
           <Table hoverable>
             <Table.Head>
