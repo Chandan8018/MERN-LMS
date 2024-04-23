@@ -60,3 +60,17 @@ export const getstudentwithborrowbooks = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteBorrowedBook = async (req, res, next) => {
+  if (!req.user.isAdmin) {
+    return next(
+      errorHandler(403, "You are not allowed to return borrowed books")
+    );
+  }
+  try {
+    await StudentBorrow.findByIdAndDelete(req.params.userId);
+    res.status(200).json("Borrow book has been returned");
+  } catch (error) {
+    next(error);
+  }
+};
