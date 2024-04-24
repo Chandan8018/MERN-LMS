@@ -137,7 +137,7 @@ export default function CommentSection({ postId }) {
         </div>
       ) : (
         <div className='text-sm text-teal-500 my-5 flex gap-1'>
-          You must be signed in to comment.
+          You must be signed in to review.
           <Link className='text-blue-500 hover:underline' to={"/sign-in"}>
             Sign In
           </Link>
@@ -151,7 +151,7 @@ export default function CommentSection({ postId }) {
           className='border border-teal-500 rounded-md p-3'
         >
           <Textarea
-            placeholder='Add a comment...'
+            placeholder='Add a review...'
             rows='3'
             maxLength='200'
             onChange={(e) => setComment(e.target.value)}
@@ -176,11 +176,11 @@ export default function CommentSection({ postId }) {
 
       {/* comments */}
       {comments.length === 0 ? (
-        <p className='text-sm my-5'>No comments yet!</p>
+        <p className='text-sm my-5'>No reviews yet!</p>
       ) : (
         <>
           <div className='text-sm my-5 flex items-center gap-1'>
-            <p>Comments</p>
+            <p>Reviews</p>
             <div className='border border-gray-400 py-1 px-2 rounded-sm'>
               <p>{comments.length}</p>
             </div>
@@ -209,7 +209,7 @@ export default function CommentSection({ postId }) {
         <Modal.Body>
           <div className='text-center'>
             <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this comment?
+              Are you sure you want to delete this review?
             </h3>
             <div className='flex justify-center gap-4'>
               <Button

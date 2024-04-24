@@ -45,11 +45,33 @@ export default function DashSideBar() {
     <Sidebar className='w-full md:w-56' aria-label='Sidebar'>
       <Sidebar.Items>
         <Sidebar.ItemGroup className='flex flex-col gap-1'>
+          <Link to='/dashboard?tab=dash'>
+            <Sidebar.Item
+              active={tab === "dash"}
+              label={currentUser.isAdmin ? "Librarian" : "Student"}
+              icon={MdDashboard}
+              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+              as='div'
+            >
+              Dashboard
+            </Sidebar.Item>
+          </Link>
+          {currentUser.isAdmin && (
+            <Link to='/dashboard?tab=students'>
+              <Sidebar.Item
+                active={tab === "students"}
+                icon={PiStudentFill}
+                className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+                as='div'
+              >
+                Students Dash
+              </Sidebar.Item>
+            </Link>
+          )}
           <Link to='/dashboard?tab=profile'>
             <Sidebar.Item
               active={tab === "profile"}
               icon={HiUser}
-              label={currentUser.isAdmin ? "Admin" : "Student"}
               className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
               as='div'
             >
@@ -57,28 +79,19 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
 
+          <Link to='/dashboard?tab=books'>
+            <Sidebar.Item
+              active={tab === "books"}
+              icon={GiBookmarklet}
+              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+              as='div'
+            >
+              Books' Collection
+            </Sidebar.Item>
+          </Link>
+
           {currentUser.isAdmin && (
             <>
-              <Link to='/dashboard?tab=dash'>
-                <Sidebar.Item
-                  active={tab === "dash"}
-                  icon={MdDashboard}
-                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
-                  as='div'
-                >
-                  Dashboard
-                </Sidebar.Item>
-              </Link>
-              <Link to='/dashboard?tab=students'>
-                <Sidebar.Item
-                  active={tab === "students"}
-                  icon={PiStudentFill}
-                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
-                  as='div'
-                >
-                  Students Dash
-                </Sidebar.Item>
-              </Link>
               <Link to='/dashboard?tab=add-book'>
                 <Sidebar.Item
                   active={tab === "add-book"}
@@ -108,22 +121,11 @@ export default function DashSideBar() {
                   className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
                   as='div'
                 >
-                  All Comments
+                  All Book Reviews
                 </Sidebar.Item>
               </Link>
             </>
           )}
-
-          <Link to='/dashboard?tab=books'>
-            <Sidebar.Item
-              active={tab === "books"}
-              icon={GiBookmarklet}
-              className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
-              as='div'
-            >
-              Books' Collection
-            </Sidebar.Item>
-          </Link>
 
           {!currentUser.isAdmin && (
             <Link to='/dashboard?tab=book-borrow'>

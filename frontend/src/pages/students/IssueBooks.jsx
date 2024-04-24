@@ -1,4 +1,11 @@
-import { Alert, Button, Modal, Table, TextInput } from "flowbite-react";
+import {
+  Alert,
+  Button,
+  FloatingLabel,
+  Modal,
+  Table,
+  TextInput,
+} from "flowbite-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -179,28 +186,31 @@ export default function IssueBooks() {
   };
 
   return (
-    <div className=' mx-auto'>
-      <div className='max-w-md mx-auto flex my-5'>
-        <TextInput
-          id='search'
+    <div className='w-full'>
+      <div className='max-w-md mx-auto grid grid-flow-col justify-items-stretch my-5'>
+        <FloatingLabel
+          variant='filled'
+          label='Enter Student Library Card Number here...'
           type='text'
-          placeholder='Enter Student Library Card Number here...'
+          sizing='sm'
           required
           style={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}
-          className=' flex-1 outline-none'
+          className='columns-sm'
           value={regdNumber}
           onChange={(e) => {
+            setFindUser(false);
             setBookIssuedSuccessfully(false);
+            setBookIssueUnsuccessfully(false);
             setRegdNumber(e.target.value);
           }}
         />
         <Button
           type='button'
           gradientDuoTone='purpleToPink'
-          className='rounded-l-none flex-4 outline-none'
+          className='rounded-l-none rounded-br-none max-h-[48px] md:max-h-[47.35px] border-b-2 border-[#D1D5DB]'
           onClick={handleSearch}
         >
           search

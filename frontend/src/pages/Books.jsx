@@ -7,10 +7,10 @@ export default function Books() {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch(`/api/post/getposts`);
+        const res = await fetch(`/api/post/getPosts/books`);
         const data = await res.json();
         if (res.ok) {
-          setRecentPosts(data.posts);
+          setRecentPosts(data);
         }
       };
       fetchRecentPosts();

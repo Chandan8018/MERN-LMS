@@ -62,7 +62,7 @@ export default function EmployeeSlider() {
 
   return (
     <div className=' pb-5'>
-      <h4 className='heading'>Our Team's</h4>
+      <h4 className='heading'>Our Team</h4>
       <div className='flex justify-evenly pb-5 min-w-full overflow-x-auto ... '>
         {employees.map((employee) => (
           <Card
