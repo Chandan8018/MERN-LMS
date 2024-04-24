@@ -121,3 +121,15 @@ export const getPost = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getBooks = async (req, res, next) => {
+  try {
+    const bookData = await post.find({});
+    if (!bookData) {
+      return next(errorHandler(404, "Books not found"));
+    }
+    res.status(200).json(bookData);
+  } catch (error) {
+    next(error);
+  }
+};
