@@ -4,6 +4,7 @@ export const create = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return next(errorHandler(403, "You are not allowed to create a post"));
   }
+
   const newBorrow = new StudentBorrow({
     ...req.body,
   });
@@ -20,11 +21,13 @@ export const getstudentborrowbooks = async (req, res, next) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 9;
     const sortDirection = req.query.sort === "desc" ? -1 : 1;
-    const borrowBooks = await StudentBorrow.find()
+    const borrowBooks = await StudentBorrow.find({
+      ...(req.query.studentId && { studentId: req.query.studentId }),
+    })
       .sort({ createdAt: sortDirection })
       .skip(startIndex)
       .limit(limit);
-    const totalBooksBorrow = await StudentBorrow.countDocuments();
+    const totalBooksBorrow = borrowBooks.length;
     const now = new Date();
     const oneMonthAgo = new Date(
       now.getFullYear(),

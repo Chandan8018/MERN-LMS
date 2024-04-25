@@ -6,7 +6,6 @@ export default function BookBorrow() {
   const { currentUser } = useSelector((state) => state.user);
   const [studentBorrowBooks, setStudentBorrowBooks] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  console.log(studentBorrowBooks);
   useEffect(() => {
     const fetchBorrowBooks = async () => {
       try {

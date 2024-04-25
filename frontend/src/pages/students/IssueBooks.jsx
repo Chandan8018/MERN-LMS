@@ -130,7 +130,6 @@ export default function IssueBooks() {
           ISBN: borrowBookDetails.ISBN,
           authorname: borrowBookDetails.authorname,
           quantity: 1,
-
           status: "borrowed",
         }),
       });

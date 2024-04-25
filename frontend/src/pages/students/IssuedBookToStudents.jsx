@@ -107,7 +107,7 @@ export default function IssuedBookToStudents() {
                     {handleReturnDate(borrowBook.updatedAt)}
                   </Table.Cell>
                   <Table.Cell>
-                    {handleFine(handleReturnDate(borrowBook.updatedAt)) || 0}
+                    {handleFine(handleReturnDate(borrowBook.updatedAt))}
                   </Table.Cell>
                   <Table.Cell>{borrowBook.quantity}</Table.Cell>
                 </Table.Row>

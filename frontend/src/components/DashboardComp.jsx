@@ -6,22 +6,69 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
+import { ImBooks } from "react-icons/im";
+import { FaRupeeSign } from "react-icons/fa";
 import { Button, Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 import StudentDashboardComp from "./StudentDashboardComp";
 
 export default function DashboardComp() {
+  const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [totalBorrowedBooks, setTotalBorrowedBooks] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalPosts, setTotalPosts] = useState(0);
   const [totalComments, setTotalComments] = useState(0);
+  const [lastMonthBorrowedBooks, setLastMonthBorrowedBooks] = useState(0);
   const [lastMonthUsers, setLastMonthUsers] = useState(0);
   const [lastMonthPosts, setLastMonthPosts] = useState(0);
   const [lastMonthComments, setLastMonthComments] = useState(0);
+  const [totalFines, setTotalFines] = useState(0);
   const { currentUser } = useSelector((state) => state.user);
+
+  const handleReturnDate = (date) => {
+    const borrowDate = new Date(date);
+    const timestampAfter15Days = borrowDate.getTime() + 7 * 24 * 60 * 60 * 1000;
+    const dateAfter15Days = new Date(timestampAfter15Days);
+    const localizedDateAfter15Days = dateAfter15Days.toLocaleDateString();
+    return localizedDateAfter15Days;
+  };
+
+  const handleFine = (returnDate) => {
+    const bookBorrowReturnDate = new Date(returnDate);
+    const todayDate = new Date();
+    const differenceInTime =
+      todayDate.getTime() - bookBorrowReturnDate.getTime();
+
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    const fine = Math.max(0, Math.ceil(differenceInDays)) * 10;
+    return fine;
+  };
+  const calculatTotalFines = () => {
+    let fine = 0;
+    borrowedBooks.map((borrowBook) => {
+      fine += Number(handleFine(handleReturnDate(borrowBook.updatedAt)));
+      return setTotalFines(fine);
+    });
+  };
+
   useEffect(() => {
+    const fetchBorrowedBooks = async () => {
+      try {
+        const res = await fetch(`/api/student/getstudentborrowbooks`);
+        const data = await res.json();
+        if (res.ok) {
+          setBorrowedBooks(data.borrowBooks);
+          setTotalBorrowedBooks(data.totalBooksBorrow);
+          setLastMonthBorrowedBooks(data.lastMonthBorrowBooks);
+          calculatTotalFines();
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
     const fetchUsers = async () => {
       try {
         const res = await fetch("/api/user/getusers?limit=5");
@@ -65,12 +112,40 @@ export default function DashboardComp() {
       fetchUsers();
       fetchPosts();
       fetchComments();
+      fetchBorrowedBooks();
     }
   }, [currentUser]);
   return currentUser.isAdmin ? (
     <>
       <div className='p-3 md:mx-auto bg-white dark:bg-black dark:text-white'>
         <div className='flex-wrap flex gap-4 justify-center'>
+          <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
+            <div className='flex justify-between'>
+              <div className=''>
+                <h3 className='text-gray-500 text-md uppercase'>
+                  Total Borrowed Books
+                </h3>
+                <p className='text-2xl'>{totalBorrowedBooks}</p>
+              </div>
+              <ImBooks className='bg-yellow-300 text-slate-700 rounded-full text-5xl m-3 p-1 shadow-lg' />
+            </div>
+            <div className='flex  gap-2 text-sm'>
+              <span className='text-green-500 flex items-center'>
+                <HiArrowNarrowUp />
+                {lastMonthBorrowedBooks}
+              </span>
+              <div className='text-gray-500'>Last month</div>
+            </div>
+          </div>
+          <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
+            <div className='flex justify-between'>
+              <div className=''>
+                <h3 className='text-gray-500 text-md uppercase'>Total Fines</h3>
+                <p className='text-2xl'>₹ {totalFines}</p>
+              </div>
+              <FaRupeeSign className='bg-red-600  text-white rounded-full text-5xl p-3 shadow-lg' />
+            </div>
+          </div>
           <div className='flex flex-col p-3 dark:bg-slate-800 gap-4 md:w-72 w-full rounded-md shadow-md'>
             <div className='flex justify-between'>
               <div className=''>
