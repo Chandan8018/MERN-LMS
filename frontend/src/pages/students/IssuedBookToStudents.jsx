@@ -6,7 +6,7 @@ export default function IssuedBookToStudents() {
   const { currentUser } = useSelector((state) => state.user);
   const [studentBorrowBooks, setStudentBorrowBooks] = useState([]);
   const [showMore, setShowMore] = useState(true);
-  console.log(studentBorrowBooks);
+
   useEffect(() => {
     const fetchBorrowBooks = async () => {
       try {
@@ -25,7 +25,7 @@ export default function IssuedBookToStudents() {
     if (currentUser) {
       fetchBorrowBooks();
     }
-  }, []);
+  }, [currentUser._id]);
 
   const handleShowMore = async () => {
     const startIndex = setStudentBorrowBooks.length;
@@ -45,13 +45,23 @@ export default function IssuedBookToStudents() {
     }
   };
 
-  const returnDate = (date) => {
+  const handleReturnDate = (date) => {
     const borrowDate = new Date(date);
-    const timestampAfter15Days =
-      borrowDate.getTime() + 15 * 24 * 60 * 60 * 1000;
+    const timestampAfter15Days = borrowDate.getTime() + 7 * 24 * 60 * 60 * 1000;
     const dateAfter15Days = new Date(timestampAfter15Days);
     const localizedDateAfter15Days = dateAfter15Days.toLocaleDateString();
     return localizedDateAfter15Days;
+  };
+
+  const handleFine = (returnDate) => {
+    const bookBorrowReturnDate = new Date(returnDate);
+    const todayDate = new Date();
+    const differenceInTime =
+      todayDate.getTime() - bookBorrowReturnDate.getTime();
+
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    const fine = Math.max(0, Math.ceil(differenceInDays)) * 10;
+    return fine;
   };
 
   return (
@@ -67,6 +77,7 @@ export default function IssuedBookToStudents() {
               <Table.HeadCell>Books Name</Table.HeadCell>
               <Table.HeadCell>Borrow Date</Table.HeadCell>
               <Table.HeadCell>Return Date</Table.HeadCell>
+              <Table.HeadCell>Fine</Table.HeadCell>
               <Table.HeadCell>Qyt</Table.HeadCell>
             </Table.Head>
             {studentBorrowBooks.map((borrowBook) => (
@@ -92,7 +103,12 @@ export default function IssuedBookToStudents() {
                   <Table.Cell>
                     {new Date(borrowBook.updatedAt).toLocaleDateString()}
                   </Table.Cell>
-                  <Table.Cell>{returnDate(borrowBook.updatedAt)}</Table.Cell>
+                  <Table.Cell>
+                    {handleReturnDate(borrowBook.updatedAt)}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {handleFine(handleReturnDate(borrowBook.updatedAt)) || 0}
+                  </Table.Cell>
                   <Table.Cell>{borrowBook.quantity}</Table.Cell>
                 </Table.Row>
               </Table.Body>
