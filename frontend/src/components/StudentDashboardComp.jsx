@@ -59,7 +59,6 @@ export default function StudentDashboardComp() {
         const res = await fetch("/api/post/getposts?limit=5");
         const data = await res.json();
         if (res.ok) {
-          setPosts(data.posts);
           setTotalPosts(data.totalPosts);
           setLastMonthPosts(data.lastMonthPosts);
         }

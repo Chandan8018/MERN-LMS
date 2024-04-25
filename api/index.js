@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import bodyParser from "body-parser";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUI from "swagger-ui-express";
 import userRouters from "./routes/user.route.js";
 import authRouters from "./routes/auth.route.js";
 import postRouters from "./routes/post.route.js";
@@ -29,12 +30,37 @@ app.listen(3000, () => {
   console.log("Server running on port number 3000");
 });
 
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Library Management System",
+      version: "1.0.0",
+      description: "MERN stack library management API",
+      contact: {
+        name: "Chandan Kumar Sahoo",
+        email: "chandankumarsahoo@gmail.com",
+        url: "https://github.com/Chandan8018",
+      },
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+
+  apis: ["./api/routes/*.js"],
+};
+
+const specification = swaggerJSDoc(options);
+
 app.use("/api/user", userRouters);
 app.use("/api/auth", authRouters);
 app.use("/api/post", postRouters);
 app.use("/api/comment", commentRoutes);
 app.use("/api/student", studentRouters);
-
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specification));
 //Error-Handling Middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
