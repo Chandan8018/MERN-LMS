@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { FcSearch } from "react-icons/fc";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -12,11 +12,21 @@ import icon from "../assets/logo2.png";
 
 export default function Header() {
   const path = useLocation().pathname;
+  const location = useLocation();
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const themeState = useSelector((state) => state.theme);
   const { theme } = themeState;
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
 
   const handleSignout = async () => {
     try {
@@ -35,6 +45,14 @@ export default function Header() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
   return (
     <Navbar className='border-b-gray-100 border-b-2 sticky top-0 z-10'>
       <Link
@@ -43,14 +61,16 @@ export default function Header() {
       >
         <img src={icon} alt='logo' className='h-12 w-36' />
       </Link>
-
-      <TextInput
-        type='text'
-        placeholder='Search...'
-        rightIcon={FcSearch}
-        className='hidden lg:inline text-2xl'
-      />
-
+      <form onSubmit={handleSubmit}>
+        <TextInput
+          type='text'
+          placeholder='Search...'
+          rightIcon={FcSearch}
+          className='hidden lg:inline text-2xl'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </form>
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <FcSearch className='text-2xl' />
       </Button>

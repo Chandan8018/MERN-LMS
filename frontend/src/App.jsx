@@ -15,6 +15,7 @@ import AddBook from "./pages/AddBook";
 import JoinGuidelines from "./pages/JoinGuidelines";
 import BookView from "./pages/BookView";
 import ScrollToTop from "./components/ScrollToTop";
+import Search from "./pages/Search";
 
 export default function App() {
   const themeState = useSelector((state) => state.theme);
@@ -32,6 +33,7 @@ export default function App() {
           <Route path='/sign-up' element={<Signup />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/guidelines' element={<JoinGuidelines />} />
+          <Route path='/search' element={<Search />} />
           <Route element={<OnlyAdminPrivateRoute />}>
             <Route path='/create-post' element={<AddBook />} />
             <Route path='/update-post/:postId' element={<UpdateBook />} />
