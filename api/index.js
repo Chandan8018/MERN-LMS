@@ -9,6 +9,7 @@ import postRouters from "./routes/post.route.js";
 import commentRoutes from "./routes/comment.route.js";
 import studentRouters from "./routes/student.route.js";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -61,6 +64,12 @@ app.use("/api/post", postRouters);
 app.use("/api/comment", commentRoutes);
 app.use("/api/student", studentRouters);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specification));
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+});
+
 //Error-Handling Middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
