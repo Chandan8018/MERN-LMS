@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { AiOutlineComment } from "react-icons/ai";
 import { PiStudentFill } from "react-icons/pi";
+import { FaIdCardClip } from "react-icons/fa6";
 
 export default function DashSideBar() {
   const location = useLocation();
@@ -68,6 +69,32 @@ export default function DashSideBar() {
               </Sidebar.Item>
             </Link>
           )}
+
+          {!currentUser.isAdmin && (
+            <>
+              <Link to='/dashboard?tab=book-borrow'>
+                <Sidebar.Item
+                  active={tab === "book-borrow"}
+                  icon={FaUsers}
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+                  as='div'
+                >
+                  Book Borrow
+                </Sidebar.Item>
+              </Link>
+              <Link to='/dashboard?tab=library-card'>
+                <Sidebar.Item
+                  active={tab === "library-card"}
+                  icon={FaIdCardClip}
+                  className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
+                  as='div'
+                >
+                  Library Card
+                </Sidebar.Item>
+              </Link>
+            </>
+          )}
+
           <Link to='/dashboard?tab=profile'>
             <Sidebar.Item
               active={tab === "profile"}
@@ -127,18 +154,6 @@ export default function DashSideBar() {
             </>
           )}
 
-          {!currentUser.isAdmin && (
-            <Link to='/dashboard?tab=book-borrow'>
-              <Sidebar.Item
-                active={tab === "book-borrow"}
-                icon={FaUsers}
-                className='cursor-pointer dark:hover:text-black hover:bg-gradient-to-r from-[#9C7945] via-[#F4EBA3] to-[#9C7945] rounded-lg'
-                as='div'
-              >
-                Book Borrow
-              </Sidebar.Item>
-            </Link>
-          )}
           <Sidebar.Item
             icon={FaSignOutAlt}
             className='cursor-pointer hover:bg-gradient-to-r from-red-500 via-pink-500 to-orange-500 rounded-lg'

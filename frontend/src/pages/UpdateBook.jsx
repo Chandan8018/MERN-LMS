@@ -113,7 +113,7 @@ export default function UpdateBook() {
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold dark:text-white'>
-        Update post
+        Update Book
       </h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex-1 flex flex-col gap-4 sm:flex-row justify-between'>
@@ -145,13 +145,14 @@ export default function UpdateBook() {
             <option value='Other'>Other</option>
           </Select>
         </div>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-row justify-between gap-4'>
           <TextInput
             id='ISBN'
             type='text'
             placeholder='ISBN Number'
             onChange={(e) => setFormData({ ...formData, ISBN: e.target.value })}
             value={formData.ISBN}
+            className='flex-1'
           />
           <TextInput
             id='author'
@@ -161,6 +162,7 @@ export default function UpdateBook() {
               setFormData({ ...formData, authorname: e.target.value })
             }
             value={formData.authorname}
+            className='flex-1'
           />
           <TextInput
             id='qty'
@@ -170,6 +172,7 @@ export default function UpdateBook() {
             max={100}
             onChange={(e) => setFormData({ ...formData, qty: e.target.value })}
             value={formData.qty}
+            className='flex-3'
           />
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
@@ -217,7 +220,7 @@ export default function UpdateBook() {
           }}
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>
-          Update post
+          Update Book
         </Button>
         {publishError && (
           <Alert className='mt-5' color='failure'>

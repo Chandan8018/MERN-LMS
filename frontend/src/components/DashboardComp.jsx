@@ -91,7 +91,7 @@ export default function DashboardComp() {
             <div className='flex justify-between'>
               <div className=''>
                 <h3 className='text-gray-500 text-md uppercase'>
-                  Total Comments
+                  Total Reviews
                 </h3>
                 <p className='text-2xl'>{totalComments}</p>
               </div>
@@ -156,14 +156,14 @@ export default function DashboardComp() {
           </div>
           <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
             <div className='flex justify-between  p-3 text-sm font-semibold'>
-              <h1 className='text-center p-2'>Recent comments</h1>
+              <h1 className='text-center p-2'>Recent reviews</h1>
               <Button outline gradientDuoTone='purpleToPink'>
                 <Link to={"/dashboard?tab=comments"}>See all</Link>
               </Button>
             </div>
             <Table hoverable>
               <Table.Head>
-                <Table.HeadCell>Comment content</Table.HeadCell>
+                <Table.HeadCell>Review content</Table.HeadCell>
                 <Table.HeadCell>Likes</Table.HeadCell>
               </Table.Head>
               {comments &&
@@ -188,8 +188,8 @@ export default function DashboardComp() {
             </div>
             <Table hoverable>
               <Table.Head>
-                <Table.HeadCell>Post image</Table.HeadCell>
-                <Table.HeadCell>Post Title</Table.HeadCell>
+                <Table.HeadCell>Book image</Table.HeadCell>
+                <Table.HeadCell>Book Title</Table.HeadCell>
                 <Table.HeadCell>Category</Table.HeadCell>
               </Table.Head>
               {posts &&
