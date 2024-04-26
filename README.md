@@ -1,5 +1,11 @@
 # MERN Stack Library Management System
 
+## Team Member
+- **Angadi dileep kumar**(Project Manager)
+- [**Chandan Kumar Sahoo**](https://github.com/Chandan8018)(MERN Stack Developer)
+- **Bhupinder Singh**(Frontend Developer)
+- **Obair nisar najar**(Frontend Developer)
+---
 ## Description 
 
 This project is a simple library management system built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
@@ -43,4 +49,8 @@ This project is a simple library management system built using the MERN (MongoDB
   - cookie-parser
   - nodemon
 
+---
+## Must visit enjoy features Library Management System
+
+[🕸 Click me visit website](https://lms-zopf.onrender.com/)
 
