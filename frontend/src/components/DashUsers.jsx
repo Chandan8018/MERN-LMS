@@ -73,7 +73,7 @@ export default function DashUsers() {
               <Table.HeadCell>Username</Table.HeadCell>
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>Library Card Number</Table.HeadCell>
-              <Table.HeadCell>Librarian</Table.HeadCell>
+              <Table.HeadCell>Role</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
             </Table.Head>
             {users.map((user) => (
@@ -93,7 +93,13 @@ export default function DashUsers() {
                   <Table.Cell>{user.email}</Table.Cell>
                   <Table.Cell>{user.regdNumber}</Table.Cell>
                   <Table.Cell>
-                    {user.isAdmin ? "Librarian" : "Student"}
+                    {user.isAdmin ? (
+                      <span className='font-medium text-teal-500'>
+                        Librarian
+                      </span>
+                    ) : (
+                      <span className='font-medium'>Student</span>
+                    )}
                   </Table.Cell>
                   <Table.Cell>
                     <span
