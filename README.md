@@ -43,7 +43,7 @@ This project is a simple library management system built using the MERN (MongoDB
   - MongoDB Atlas
   - Mongoose
   - Swagger (Manage Api Docs)
-  - JSW Token
+  - JWT Tokens
   - bcryptjs
   - dotenv
   - cookie-parser
