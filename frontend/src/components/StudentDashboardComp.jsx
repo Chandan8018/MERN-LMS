@@ -114,47 +114,46 @@ export default function StudentDashboardComp() {
           </div>
         </div>
       </div>
-      <div className='flex flex-wrap gap-4 py-3 mx-auto justify-center'>
-        <div className='flex flex-col w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
-          <div className='flex justify-between  p-3 text-sm font-semibold'>
-            <h1 className='text-center p-2'>Borrowed Books' List</h1>
-          </div>
-          <Table hoverable>
-            <Table.Head>
-              <Table.HeadCell>Book image</Table.HeadCell>
-              <Table.HeadCell>Book Title</Table.HeadCell>
-              <Table.HeadCell>Borrowed Date</Table.HeadCell>
-              <Table.HeadCell>Return Date</Table.HeadCell>
-              <Table.HeadCell>Fine Amount</Table.HeadCell>
-            </Table.Head>
-            {borrowedBooks &&
-              borrowedBooks.map((borrowedBook) => (
-                <Table.Body key={borrowedBook._id} className='divide-y'>
-                  <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                    <Table.Cell>
-                      <img
-                        src={borrowedBook.bookImage}
-                        alt='user'
-                        className='w-10 h-14 rounded-md bg-gray-500'
-                      />
-                    </Table.Cell>
-                    <Table.Cell className='w-96'>
-                      {borrowedBook.bookname}
-                    </Table.Cell>
-                    <Table.Cell className='w-5'>
-                      {new Date(borrowedBook.updatedAt).toLocaleDateString()}
-                    </Table.Cell>
-                    <Table.Cell>
-                      {handleReturnDate(borrowedBook.updatedAt)}
-                    </Table.Cell>
-                    <Table.Cell>
-                      {handleFine(handleReturnDate(borrowedBook.updatedAt))}
-                    </Table.Cell>
-                  </Table.Row>
-                </Table.Body>
-              ))}
-          </Table>
+
+      <div className='flex flex-col overflow-x-scroll w-full md:w-auto shadow-md p-2 rounded-md dark:bg-gray-800'>
+        <div className='flex justify-between  p-3 text-sm font-semibold'>
+          <h1 className='text-center p-2'>Borrowed Books' List</h1>
         </div>
+        <Table hoverable>
+          <Table.Head>
+            <Table.HeadCell>Book image</Table.HeadCell>
+            <Table.HeadCell>Book Title</Table.HeadCell>
+            <Table.HeadCell>Borrowed Date</Table.HeadCell>
+            <Table.HeadCell>Return Date</Table.HeadCell>
+            <Table.HeadCell>Fine Amount</Table.HeadCell>
+          </Table.Head>
+          {borrowedBooks &&
+            borrowedBooks.map((borrowedBook) => (
+              <Table.Body key={borrowedBook._id} className='divide-y'>
+                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+                  <Table.Cell>
+                    <img
+                      src={borrowedBook.bookImage}
+                      alt='user'
+                      className='w-10 h-14 rounded-md bg-gray-500'
+                    />
+                  </Table.Cell>
+                  <Table.Cell className='w-96'>
+                    {borrowedBook.bookname}
+                  </Table.Cell>
+                  <Table.Cell className='w-5'>
+                    {new Date(borrowedBook.updatedAt).toLocaleDateString()}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {handleReturnDate(borrowedBook.updatedAt)}
+                  </Table.Cell>
+                  <Table.Cell>
+                    {handleFine(handleReturnDate(borrowedBook.updatedAt))}
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            ))}
+        </Table>
       </div>
     </div>
   );
