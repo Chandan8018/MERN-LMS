@@ -22,6 +22,14 @@ export default function EmployeeSlider() {
     },
     {
       id: 3,
+      name: "Sukhjiwan Singh",
+      photo:
+        "https://firebasestorage.googleapis.com/v0/b/mern-lms-5f11d.appspot.com/o/1714582499383photo.jpg?alt=media&token=b26b3c03-bf4c-4601-b5c7-2340e92ca697",
+      position: "Tester",
+      description: "Sukhjiwan Singh is the tester of the project.",
+    },
+    {
+      id: 4,
       name: "Bhupinder Singh",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
@@ -30,7 +38,7 @@ export default function EmployeeSlider() {
     },
 
     {
-      id: 4,
+      id: 5,
       name: "Pawanjeet Singh",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
@@ -38,7 +46,7 @@ export default function EmployeeSlider() {
       description: "Pawanjeet is the Designer of the project.",
     },
     {
-      id: 5,
+      id: 6,
       name: "Obair nisar najar",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
@@ -46,7 +54,7 @@ export default function EmployeeSlider() {
       description: "Obair is the Frontend Designer of the project.",
     },
     {
-      id: 6,
+      id: 7,
       name: "Anwar khan",
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
