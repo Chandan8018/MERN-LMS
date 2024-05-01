@@ -16,7 +16,7 @@ export default function EmployeeSlider() {
       id: 2,
       name: "Chandan Kumar Sahoo",
       photo:
-        "https://firebasestorage.googleapis.com/v0/b/mern-lms-5f11d.appspot.com/o/17131099915741711087824576.jpg?alt=media&token=15c1f56c-d037-45c2-831a-4b55a4b48252",
+        "https://firebasestorage.googleapis.com/v0/b/mern-lms-5f11d.appspot.com/o/17141154436691711086095883.jpg?alt=media&token=5afaf5b0-c7d4-4676-b7f9-f19b7bfc1623",
       position: "UX Designer",
       description: "Chandan is the UX Designer of the project.",
     },
