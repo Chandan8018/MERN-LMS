@@ -111,7 +111,7 @@ export default function BookBorrow() {
         </>
       ) : (
         <h1 className=' flex items-center justify-center text-xl md:text-2xl font-bold mt-5 '>
-          No books have been issued to the students.
+          No book have been issued.
         </h1>
       )}
     </div>
