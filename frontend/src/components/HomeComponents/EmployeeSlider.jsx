@@ -43,7 +43,7 @@ export default function EmployeeSlider() {
       photo:
         "https://img.freepik.com/premium-vector/businessman-avatar-cartoon-character-profile_18591-50581.jpg",
       position: "Designer",
-      description: "Pawanjeet is the Designer of the project.",
+      description: "Pawanjeet is the Designer of the project",
     },
     {
       id: 6,
