@@ -1,10 +1,4 @@
 # MERN Stack Library Management System
-
-## Team Member
-- **Angadi dileep kumar**(Project Manager)
-- [**Chandan Kumar Sahoo**](https://github.com/Chandan8018)(MERN Stack Developer)
-- **Bhupinder Singh**(Frontend Developer)
-- **Obair nisar najar**(Frontend Developer)
 ---
 ## Description 
 
