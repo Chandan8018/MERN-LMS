@@ -17,7 +17,7 @@ export default function EmployeeSlider() {
       name: "Chandan Kumar Sahoo",
       photo:
         "https://firebasestorage.googleapis.com/v0/b/mern-lms-5f11d.appspot.com/o/17141154436691711086095883.jpg?alt=media&token=5afaf5b0-c7d4-4676-b7f9-f19b7bfc1623",
-      position: "UX Designer",
+      position: "MERN Stack Developer",
       description: "Chandan is the UX Designer of the project.",
     },
     {
